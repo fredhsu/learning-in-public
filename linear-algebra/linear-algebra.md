@@ -12,11 +12,15 @@ The primary vector operations are:
 - vector addition - combining vectors end to end
 - multiplication by a scalar - scales the vector
 
+A vector exists outside of its coordinates and is not the same as its coordinates
+Vectors can represent different coordinates in different coordinate spaces through [[linear transformation]].
+
 ## Basis Vectors
 
-Basis vectors of a [[Vector Space]] is a set of [[Linearly Independent]] vectors that span the full space.
+Basis vectors of a [[Vector Space]] are a set of [[Linearly Independent]] vectors that span the full space. 
+Since a vector space can have infinitely many vectors, using the basis allows us to succinctly define and work with the VS.
 
-- Given S subset of V, S is basis of V if
+Given S subset of V, S is basis of V if
 - S is LI
 - Span(S) = V
 - The elements of S are basis vectors
@@ -78,11 +82,18 @@ For example, ℝ³ is a vector space.
 
 The span is all the vectors that can be reached by using a linear combination of a given set of vectors. Adding linearly dependent vectors does not increase the span.
 
+## Linear Dependence
+
+A subset of vectors contains the zero vector or one of its vectors can be represented as a [[linear combination]] of other vectors.
+This implies there is a "redundant" vector in the set.
+Another definition would be if the null vector 0 can be obtained through linear combination. [^moml56]
+
 ## Linear Independence
 
 No vectors in a set can be written as linear combinations other vectors in the set.
 Can be found by Gaussian Elimination and checking if there are no non-zero rows, calculating the determinant for a square matrix and checking if it is != 0, or if rank = # of vectors.
 If adding another vector increases the [[Span]] they are linearly independent.
+Another definition would be it is linearly independent iff when the sum of all vectors multiplied by coeffiencts is zero, all coefficients are zero[^moml56]
 
 ## Norm
 
@@ -127,3 +138,4 @@ Math of Machine Learning (MoML)
 [^3b1b-det]: Great video from 3b1b on this.
 [^3]: Distance between vectors for an inner product space (V, <.,.>) : d(x,y) := |x - y| = sqrt(<x - y>, <x - y>). Relates to [[L2 Norm]].
 [^4]: cos w = <x, y> / (||x|| ||y||) by Cauchy-Schwartz Inequality
+[^moml56]: Theorem 2 from MoML
