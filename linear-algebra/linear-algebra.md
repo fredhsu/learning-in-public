@@ -128,6 +128,16 @@ When det = 0, it squishes the area down to a line or point, and indicates the ma
 If det is negative, there is a "flip", but the change in area is equivalent to the absolute value of the determinant.
 [^3b1b-det]
 
+The determinant can only be found for a square matrix.
+
+Calculating the determinant
+For 2D
+For 3D
+For nxn - reduce to 2x2
+
+## 
+
+## Eigenvectors and Eigenvalues
 
 ## References
 Math for Machine Learning (MML)
