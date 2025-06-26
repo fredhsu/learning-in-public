@@ -17,10 +17,11 @@ Vectors can represent different coordinates in different coordinate spaces throu
 
 ## Basis Vectors
 
-Basis vectors of a [[Vector Space]] are a set of [[Linearly Independent]] vectors that span the full space. 
+Basis vectors of a [[Vector Space]] are a set of [[Linearly Independent]] vectors that span the full space.
 Since a vector space can have infinitely many vectors, using the basis allows us to succinctly define and work with the VS.
 
 Given S subset of V, S is basis of V if
+
 - S is LI
 - Span(S) = V
 - The elements of S are basis vectors
@@ -29,7 +30,8 @@ Given S subset of V, S is basis of V if
 ### Orthormal Basis (ONB)
 
 Basis vectors that are orthonormal (orthogonal and have length 1)
-- [[inner product]] is 0 : <b_i, b_j> = 0 for i != j (orthogonal), 
+
+- [[inner product]] is 0 : <b_i, b_j> = 0 for i != j (orthogonal),
 - <b_i, b_i> = 1 ; have length = 1
 
 ## Matrix
@@ -56,9 +58,10 @@ Any matrix can be geometrically viewed as a [[Linear Transformation]]
 - Results in a rotation when viewed as a linear transformation, the transformation is done relative to an [[orthonormal basis]]
 
 ## Linear Combination
+
 A combination of scaling (multiplying) or adding vectors
 
-## Linear Transformations
+## Linear Transformation
 
 By multiplying a vector by a matrix, we can perform transformations of the vector. So geometrically a matrix represents a linear transform of a vector.
 
@@ -69,6 +72,7 @@ Linear Transformations have the key properties:
 3. Grid lines stay equally spaced and parallel
 
 The transformation can be described in terms of how the basis vector changes.
+
 - [Interactive Tool](https://claude.ai/public/artifacts/ebfef9fb-c08b-48ca-a9ed-9ec68ef6ba6b)
 - [3 Blue 1 Brown video](https://www.youtube.com/watch?v=kYB8IZa5AuE)
 
@@ -77,6 +81,8 @@ The transformation can be described in terms of how the basis vector changes.
 The vector space defines a set V of vectors, a field F, vector addition, and scalar multiplication that follow a vector space axioms such as closure, associativity, identity elements, inverses, and distributive properties.
 
 For example, ℝ³ is a vector space.
+
+Best described by the [[Basis]]
 
 ## Span
 
@@ -103,7 +109,6 @@ Common norms are:
 - L1 (Manhattan): sum of absolute values  
 - L2 (Euclidean): square root of a sum of squares.
 
-
 Norms have three properties:
 
 1. Non-negative
@@ -115,15 +120,15 @@ Used in: Regularization, Optimization (Grad Descent), Loss functions, distance m
 ## Inner Product
 
 - ⟨u,v⟩→R
-- A bilinear mapping that is symmetric and positive definite (always positive when applied to itself). 
-- Takes two vectors and returns a scalar. 
+- A bilinear mapping that is symmetric and positive definite (always positive when applied to itself).
+- Takes two vectors and returns a scalar.
 - Measures length[^3] and angle[^4] between them. If ⟨u,v⟩=0, then u⊥v, if ||x|| = 1 = ||y|| it is also orthonormal.
 - Generalization of [[Dot Product]]
 - MML pg 73-76
 
 ## Determinant
 
-For a 2-D vector space, it gives the change in the area of a square created by the [[basis vector]]s. Change in volume for a cube in 3D. 
+For a 2-D vector space, it gives the change in the area of a square created by the [[basis vector]]s. Change in volume for a cube in 3D.
 When det = 0, it squishes the area down to a line or point, and indicates the matrix is [[linearly dependent]].
 If det is negative, there is a "flip", but the change in area is equivalent to the absolute value of the determinant.
 [^3b1b-det]
@@ -135,11 +140,45 @@ For 2D
 For 3D
 For nxn - reduce to 2x2
 
-## 
+## Trace
+
+The diagonal sum of the matrix
+
+## Characteristic Polynomial
+
+For a square matrix:
+$$P_a(\lambda) = det(A - \lambda I)$$
+Used in calculating [[Eigenvectors]]
 
 ## Eigenvectors and Eigenvalues
 
+- Eigenvectors and values characterize the linear mapping of a square matrix.
+
+### Eigenvectors
+
+- Eigenvectors point in the direction of the mapping
+
+### Eigenvalues
+
+- Eigenvalues indicate how much the eigenvectors are stretched
+
+### Calculations
+
+- For a matrix A, eigenvector x, and eigenvalue $$\lambda$$ : $$ Ax = \lambda x $$
+- $$det(A - \lambda I_n = 0)$$
+- If $A \elem R^(nxn)$ is symmetric, there is an [[ONB]] of the vector space with the eigenvector of A and a real eigenvalue
+- The [[Determinant]] of a matrix is equal to the product of its eigenvalues: $$det(A) = \Pi i=1 to n \lambda_i$$
+  - Ties in the fact that the determinant calculates the area of the transformation with the eigenvalues.
+- Solving for the [[Eigenvalues]] and [[Eigenvectors]]
+  1. Set [[Charateristic Polynomial]] = 0: $$P_A(\lambda) = 0$$
+  2.
+
+### PageRank
+
+- Uses the [[Eigenvector]] of the maximal [[Eigenvalues]] to rank a page based on the incoming links and how important they are.
+
 ## References
+
 Math for Machine Learning (MML)
 Math of Machine Learning (MoML)
 3b1b
