@@ -37,12 +37,14 @@ Basis vectors that are orthonormal (orthogonal and have length 1)
 ## Matrix
 
 A matrix can be used to represent a series of linear equations. For example given the following linear equations:
+
 $$
 x + 2y = 5
 3x + 4y = 11
 $$
 
 This becomes:
+
 $$
 \begin{bmatrix}
 1 & 2 & 5 \\
@@ -106,7 +108,7 @@ Another definition would be it is linearly independent iff when the sum of all v
 The magnitude of a vector from the origin.
 Common norms are:
 
-- L1 (Manhattan): sum of absolute values  
+- L1 (Manhattan): sum of absolute values
 - L2 (Euclidean): square root of a sum of squares.
 
 Norms have three properties:
@@ -177,6 +179,22 @@ Used in calculating [[Eigenvectors]]
 
 - Uses the [[Eigenvector]] of the maximal [[Eigenvalues]] to rank a page based on the incoming links and how important they are.
 
+## Decomposing Matrices
+
+### Cholesky Decomposition
+
+Decomposes into a lower triangular matrix and its transpose:
+$A = LL^T$
+$ $
+
+$\begin{bmatrix} A_00 A_01 A_02 \\ A_10 A_11 A_12 \\ A_20 A_21 A_22 \end{bmatrix}=$
+$\begin{bmatrix} L_00 0 0 \\ L_10 L_11 L_12 \\ L_20 L_21 L_22 \end{bmatrix} \begin{bmatrix} L_00 L_01 L_02 \\ L_10 L_11 L_12 \\ L_20 L_21 L_22 \end{bmatrix}$
+Example:
+
+### Eigendecomposition
+
+### Singular Value Decomposition
+
 ## References
 
 Math for Machine Learning (MML)
@@ -184,7 +202,11 @@ Math of Machine Learning (MoML)
 3b1b
 
 [^1]: I am using Pandoc and LaTeX to render some of this math. In this case pmatrix, bmatrix Bmatrix give parenthesis, brackets, braces matrix styles are useful latex options.
+
 [^3b1b-det]: Great video from 3b1b on this.
+
 [^3]: Distance between vectors for an inner product space (V, <.,.>) : d(x,y) := |x - y| = sqrt(<x - y>, <x - y>). Relates to [[L2 Norm]].
+
 [^4]: cos w = <x, y> / (||x|| ||y||) by Cauchy-Schwartz Inequality
+
 [^moml56]: Theorem 2 from MoML
