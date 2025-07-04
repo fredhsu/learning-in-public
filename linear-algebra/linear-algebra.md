@@ -1,5 +1,12 @@
 # Linear Algebra notes
 
+## Summary
+
+Linear algebra provides tools for solving and manipulating vectors and matrices. Beginning with vectors that define a length and direction, represented by a list of numbers, and more abstractly follow rules for vector addition and multiplying by a scalar.
+Vectors can be combined using linear combinations, essentially adding and scaling vectors to create a new vector. and can be used to represent a linear equation.
+From a networking perspective
+from a AI/ML perspective
+
 ## Vector
 
 Vectors are a fundamental concept in linear algebra and can have multiple interpretations from physics, to computer science, and mathematics. For our purposes we will use assume they represent a line that begins at the origin, and goes to the point represented by the vector.
@@ -179,21 +186,27 @@ Used in calculating [[Eigenvectors]]
 
 - Uses the [[Eigenvector]] of the maximal [[Eigenvalues]] to rank a page based on the incoming links and how important they are.
 
-## Decomposing Matrices
+## Matrix Decomposition
+
+Matrix decomposition breaks a matrix down into multiple factors, much like factoring an equation. The resulting
+components can describe characteristics of the matrix, as well as make some calculations more efficient.
 
 ### Cholesky Decomposition
 
 Decomposes into a lower triangular matrix and its transpose:
 $A = LL^T$
-$ $
 
-$\begin{bmatrix} A_00 A_01 A_02 \\ A_10 A_11 A_12 \\ A_20 A_21 A_22 \end{bmatrix}=$
-$\begin{bmatrix} L_00 0 0 \\ L_10 L_11 L_12 \\ L_20 L_21 L_22 \end{bmatrix} \begin{bmatrix} L_00 L_01 L_02 \\ L_10 L_11 L_12 \\ L_20 L_21 L_22 \end{bmatrix}$
+$\begin{bmatrix} A_{00} A_{01} A_{02} \\ A_{10} A_{11} A_{12} \\ A_{20} A_{21} A_{22} \end{bmatrix}=$
+$\begin{bmatrix} L_{00} L_{01} L_{02} \\ L_{10} L_{11} L_{12} \\ 0 0 0 \end{bmatrix} \begin{bmatrix} L_{00} L_{01} L_{02} \\ L_{10} L_{11} L_{12} \\ L_{20} L_{21} L_{22} \end{bmatrix}$
 Example:
 
 ### Eigendecomposition
 
+Breaks a matrix down into $PDP^(-1)$ but only works on square matrices.
+
 ### Singular Value Decomposition
+
+Can decompose any matrix into $U \Sigma V^T$
 
 ## References
 
