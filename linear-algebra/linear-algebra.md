@@ -7,7 +7,7 @@ Vectors can be combined using linear combinations, essentially adding and scalin
 From a networking perspective
 from a AI/ML perspective
 
-## Vector
+## Vectors
 
 Vectors are a fundamental concept in linear algebra and can have multiple interpretations from physics, to computer science, and mathematics. For our purposes we will use assume they represent a line that begins at the origin, and goes to the point represented by the vector.
 They are represented[^1] like this:
@@ -22,6 +22,14 @@ The primary vector operations are:
 A vector exists outside of its coordinates and is not the same as its coordinates
 Vectors can represent different coordinates in different coordinate spaces through [[linear transformation]].
 
+### Orthogonal Vectors
+
+Vector that is perpendicular to another vector or vector space. It has a dot product of zero with the other vector, or with all the vectors of the other vector space.
+
+### Orthonormal Vectors
+
+[[Orthogonal Vectors]] with length 1.
+
 ## Basis Vectors
 
 Basis vectors of a [[Vector Space]] are a set of [[Linearly Independent]] vectors that span the full space.
@@ -34,12 +42,18 @@ Given S subset of V, S is basis of V if
 - The elements of S are basis vectors
 - MoML pg 57
 
-### Orthormal Basis (ONB)
+### Orthonormal Basis (ONB)
 
-Basis vectors that are orthonormal (orthogonal and have length 1)
+Basis vectors that are orthonormal ([[Orthogonal Vector]] and have length 1)
 
 - [[inner product]] is 0 : <b_i, b_j> = 0 for i != j (orthogonal),
 - <b_i, b_i> = 1 ; have length = 1
+
+Can be found by using [[Gram-Schmidt algorithm]]
+
+### Gram-Schmidt algorithm
+
+An iterative method for constructing [[Orthonormal Basis]] from a set of [[Vectors]] by finding a set of [[Orthogonal Vectors]], then normalizing the distance.
 
 ## Matrix
 
