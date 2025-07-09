@@ -152,7 +152,7 @@ Used in: Regularization, Optimization (Grad Descent), Loss functions, distance m
 ## Determinant
 
 For a 2-D vector space, it gives the change in the area of a square created by the [[basis vector]]s. Change in volume for a cube in 3D.
-When det = 0, it squishes the area down to a line or point, and indicates the matrix is [[linearly dependent]].
+When det = 0, it squishes the area down to a line or point, and indicates the matrix has [[Linear Dependence]].
 If det is negative, there is a "flip", but the change in area is equivalent to the absolute value of the determinant.
 [^3b1b-det]
 
@@ -200,10 +200,17 @@ Used in calculating [[Eigenvectors]]
 
 - Uses the [[Eigenvector]] of the maximal [[Eigenvalues]] to rank a page based on the incoming links and how important they are.
 
+<<<<<<< HEAD
 ## Matrix Decomposition
 
 Matrix decomposition breaks a matrix down into multiple factors, much like factoring an equation. The resulting
 components can describe characteristics of the matrix, as well as make some calculations more efficient.
+=======
+## Null space
+
+
+## Decomposing Matrices
+>>>>>>> dc0d157 (implemented Gram Schmidt in the jupyter notebook, added some subtopics)
 
 ### Cholesky Decomposition
 
