@@ -20,7 +20,7 @@ The primary vector operations are:
 - multiplication by a scalar - scales the vector
 
 A vector exists outside of its coordinates and is not the same as its coordinates
-Vectors can represent different coordinates in different coordinate spaces through [[linear transformation]].
+Vectors can represent different coordinates in different coordinate spaces through [[Linear Transformation]].
 
 ### Orthogonal Vectors
 
@@ -30,7 +30,7 @@ Vector that is perpendicular to another vector or vector space. It has a dot pro
 
 [[Orthogonal Vectors]] with length 1.
 
-## Basis Vectors
+### Basis Vectors
 
 Basis vectors of a [[Vector Space]] are a set of [[Linearly Independent]] vectors that span the full space.
 Since a vector space can have infinitely many vectors, using the basis allows us to succinctly define and work with the VS.
@@ -44,7 +44,7 @@ Given S subset of V, S is basis of V if
 
 ### Orthonormal Basis (ONB)
 
-Basis vectors that are orthonormal ([[Orthogonal Vector]] and have length 1)
+Basis vectors that are orthonormal
 
 - [[inner product]] is 0 : <b_i, b_j> = 0 for i != j (orthogonal),
 - <b_i, b_i> = 1 ; have length = 1
@@ -53,9 +53,64 @@ Can be found by using [[Gram-Schmidt algorithm]]
 
 ### Gram-Schmidt algorithm
 
-An iterative method for constructing [[Orthonormal Basis]] from a set of [[Vectors]] by finding a set of [[Orthogonal Vectors]], then normalizing the distance.
+An iterative method for constructing an [[Orthonormal Basis]] from a set of [[Linearly Independent]] vectors. It works by orthogonalizing each vector with respect to the previous ones, then normalizing each resulting vector to have unit length.[^GS-Jupyter]
 
-## Matrix
+### Linear Combination
+
+A combination of scaling (multiplying) or adding vectors
+
+### Norm
+
+The magnitude of a vector from the origin.
+Common norms are:
+
+- L1 (Manhattan): sum of absolute values
+- L2 (Euclidean): square root of a sum of squares.
+
+Norms have three properties:
+
+1. Non-negative
+2. Homogeneity: ||ax|| = ||a|| ||x|| for any scalar a
+3. Triangle inequality = ||x+y|| <= ||x||+||y||
+
+Used in: Regularization, Optimization (Grad Descent), Loss functions, distance metrics, batch and layer normalization.
+
+### Vector Space
+
+The vector space defines a set V of vectors, a field F, vector addition, and scalar multiplication that follow a vector space axioms such as closure, associativity, identity elements, inverses, and distributive properties.
+
+For example, ℝ³ is a vector space.
+
+Best described by the [[Basis]]
+
+
+### Linearly Dependent
+
+A subset of vectors contains the zero vector or one of its vectors can be represented as a [[Linear Combination]] of other vectors.
+This implies there is a "redundant" vector in the set.
+Another definition would be if the null vector 0 can be obtained through linear combination. [^moml56]
+
+### Linearly Independent
+
+No vectors in a set can be written as linear combinations other vectors in the set.
+Can be found by Gaussian Elimination and checking if there are no non-zero rows, calculating the determinant for a square matrix and checking if it is != 0, or if rank = # of vectors.
+If adding another vector increases the [[Span]] they are linearly independent.
+Another definition would be it is linearly independent iff when the sum of all vectors multiplied by coeffiencts is zero, all coefficients are zero[^moml56]
+
+### Span
+
+The span is all the vectors that can be reached by using a linear combination of a given set of vectors. Adding linearly dependent vectors does not increase the span.
+
+### Inner Product
+
+- ⟨u,v⟩→R
+- A bilinear mapping that is symmetric and positive definite (always positive when applied to itself).
+- Takes two vectors and returns a scalar.
+- Measures length[^3] and angle[^4] between them. If ⟨u,v⟩=0, then u⊥v, if ||x|| = 1 = ||y|| it is also orthonormal.
+- Generalization of [[Dot Product]]
+- MML pg 73-76
+
+## Matrices
 
 A matrix can be used to represent a series of linear equations. For example given the following linear equations:
 
@@ -73,18 +128,15 @@ $$
 \end{bmatrix}
 $$
 
-Any matrix can be geometrically viewed as a [[Linear Transformation]]
+Any matrix can be geometrically viewed as a [[Linear Transformation]]. In fact, you can create a 1:1 correspondence between a set of linear transformations $f$ and a matrix $A$ for a given basis. From this perspective a matrix is simply a representation of linear transformations relative to a given basis.
 
 ### Orthogonal Matrix
 
 - Has columns that are [[orthnormal]], resulting in A^(-1) = A^T, which makes calculating the inverse efficient
 - Results in a rotation when viewed as a linear transformation, the transformation is done relative to an [[orthonormal basis]]
 
-## Linear Combination
 
-A combination of scaling (multiplying) or adding vectors
-
-## Linear Transformation
+### Linear Transformation
 
 By multiplying a vector by a matrix, we can perform transformations of the vector. So geometrically a matrix represents a linear transform of a vector.
 
@@ -99,60 +151,10 @@ The transformation can be described in terms of how the basis vector changes.
 - [Interactive Tool](https://claude.ai/public/artifacts/ebfef9fb-c08b-48ca-a9ed-9ec68ef6ba6b)
 - [3 Blue 1 Brown video](https://www.youtube.com/watch?v=kYB8IZa5AuE)
 
-## Vector Space
+### Determinant
 
-The vector space defines a set V of vectors, a field F, vector addition, and scalar multiplication that follow a vector space axioms such as closure, associativity, identity elements, inverses, and distributive properties.
-
-For example, ℝ³ is a vector space.
-
-Best described by the [[Basis]]
-
-## Span
-
-The span is all the vectors that can be reached by using a linear combination of a given set of vectors. Adding linearly dependent vectors does not increase the span.
-
-## Linear Dependence
-
-A subset of vectors contains the zero vector or one of its vectors can be represented as a [[linear combination]] of other vectors.
-This implies there is a "redundant" vector in the set.
-Another definition would be if the null vector 0 can be obtained through linear combination. [^moml56]
-
-## Linear Independence
-
-No vectors in a set can be written as linear combinations other vectors in the set.
-Can be found by Gaussian Elimination and checking if there are no non-zero rows, calculating the determinant for a square matrix and checking if it is != 0, or if rank = # of vectors.
-If adding another vector increases the [[Span]] they are linearly independent.
-Another definition would be it is linearly independent iff when the sum of all vectors multiplied by coeffiencts is zero, all coefficients are zero[^moml56]
-
-## Norm
-
-The magnitude of a vector from the origin.
-Common norms are:
-
-- L1 (Manhattan): sum of absolute values
-- L2 (Euclidean): square root of a sum of squares.
-
-Norms have three properties:
-
-1. Non-negative
-2. Homogeneity: ||ax|| = ||a|| ||x|| for any scalar a
-3. Triangle inequality = ||x+y|| <= ||x||+||y||
-
-Used in: Regularization, Optimization (Grad Descent), Loss functions, distance metrics, batch and layer normalization.
-
-## Inner Product
-
-- ⟨u,v⟩→R
-- A bilinear mapping that is symmetric and positive definite (always positive when applied to itself).
-- Takes two vectors and returns a scalar.
-- Measures length[^3] and angle[^4] between them. If ⟨u,v⟩=0, then u⊥v, if ||x|| = 1 = ||y|| it is also orthonormal.
-- Generalization of [[Dot Product]]
-- MML pg 73-76
-
-## Determinant
-
-For a 2-D vector space, it gives the change in the area of a square created by the [[basis vector]]s. Change in volume for a cube in 3D.
-When det = 0, it squishes the area down to a line or point, and indicates the matrix has [[Linear Dependence]].
+For a 2-D vector space, it gives the change in the area of a square created by the [[Basis Vector]]s. Change in volume for a cube in 3D.
+When det = 0, it squishes the area down to a line or point, and indicates the vectors of the matrix are [[Linearly Dependent]].
 If det is negative, there is a "flip", but the change in area is equivalent to the absolute value of the determinant.
 [^3b1b-det]
 
@@ -163,31 +165,35 @@ For 2D
 For 3D
 For nxn - reduce to 2x2
 
-## Trace
+### Trace
 
 The diagonal sum of the matrix
 
-## Characteristic Polynomial
+### Characteristic Polynomial
 
 For a square matrix:
 $$P_a(\lambda) = det(A - \lambda I)$$
-Used in calculating [[Eigenvectors]]
+Used in calculating [[Eigenvector]]
 
-## Eigenvectors and Eigenvalues
+### Eigenvectors and Eigenvalues
 
-- Eigenvectors and values characterize the linear mapping of a square matrix.
+Eigenvectors and values characterize the [[Linear Transformation]] of a square matrix. The mathematical relationship is:
+$$Av = \lambda v$$
+where v is the eigenvector and $$\lambda$$ is the eigenvalue.
 
-### Eigenvectors
+[Visualization of Eigenvector](https://claude.ai/public/artifacts/bc712e4f-70d5-4dba-8ff0-5d79695343f4)
 
-- Eigenvectors point in the direction of the mapping
+#### Eigenvector
 
-### Eigenvalues
+Eigenvectors point in the directions that are preserved (or exactly reversed) by a linear transformation. While most vectors change both magnitude and direction when transformed, eigenvectors only change in magnitude by a factor equal to their corresponding eigenvalue.
 
-- Eigenvalues indicate how much the eigenvectors are stretched
+#### Eigenvalue
 
-### Calculations
+Eigenvalues indicate how much the eigenvectors are stretched as a result of the linear transformation. If the eigenvalue is 1 then there is no change, 0 means the eigenvector becomes the zero vector and reduces the dimensionality of the vector space. The number of zero eigenvalues indicates how much the dimensionality of the vector space is reduced.
 
-- For a matrix A, eigenvector x, and eigenvalue $$\lambda$$ : $$ Ax = \lambda x $$
+#### Calculation
+
+For a matrix A, eigenvector x, and eigenvalue $$\lambda$$ : $$ Ax = \lambda x $$
 - $$det(A - \lambda I_n = 0)$$
 - If $A \elem R^(nxn)$ is symmetric, there is an [[ONB]] of the vector space with the eigenvector of A and a real eigenvalue
 - The [[Determinant]] of a matrix is equal to the product of its eigenvalues: $$det(A) = \Pi i=1 to n \lambda_i$$
@@ -198,19 +204,16 @@ Used in calculating [[Eigenvectors]]
 
 ### PageRank
 
-- Uses the [[Eigenvector]] of the maximal [[Eigenvalues]] to rank a page based on the incoming links and how important they are.
+Uses the [[Eigenvector]] of the maximal [[Eigenvalues]] to rank a page based on the incoming links and how important they are.
 
-<<<<<<< HEAD
+## Null space
+
+Has dimension equal to the number of zero [[Eigenvalue]]s.
+
 ## Matrix Decomposition
 
 Matrix decomposition breaks a matrix down into multiple factors, much like factoring an equation. The resulting
 components can describe characteristics of the matrix, as well as make some calculations more efficient.
-=======
-## Null space
-
-
-## Decomposing Matrices
->>>>>>> dc0d157 (implemented Gram Schmidt in the jupyter notebook, added some subtopics)
 
 ### Cholesky Decomposition
 
@@ -244,3 +247,4 @@ Math of Machine Learning (MoML)
 [^4]: cos w = <x, y> / (||x|| ||y||) by Cauchy-Schwartz Inequality
 
 [^moml56]: Theorem 2 from MoML
+[^GS-Jupyter]: See Jupyter notebook for an implementation
