@@ -6,151 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>linear-algebra</title>
   <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    svg {
-      height: auto;
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -166,14 +21,27 @@
       vertical-align: middle;
     }
   </style>
+  <link rel="stylesheet" href="tufte.css" />
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
   type="text/javascript"></script>
 </head>
 <body>
+<article>
 <h1 id="linear-algebra-notes">Linear Algebra notes</h1>
-<h2 id="vector">Vector</h2>
+<section>
+<h2 id="summary">Summary</h2>
+<p>Linear algebra provides tools for solving and manipulating vectors
+and matrices. Beginning with vectors that define a length and direction,
+represented by a list of numbers, and more abstractly follow rules for
+vector addition and multiplying by a scalar. Vectors can be combined
+using linear combinations, essentially adding and scaling vectors to
+create a new vector. and can be used to represent a linear equation.
+From a networking perspective from a AI/ML perspective</p>
+</section>
+<section>
+<h2 id="vectors">Vectors</h2>
 <p>Vectors are a fundamental concept in linear algebra and can have
 multiple interpretations from physics, to computer science, and
 mathematics. For our purposes we will use assume they represent a line
@@ -194,13 +62,21 @@ braces matrix styles are useful latex options.<br />
 </ul>
 <p>A vector exists outside of its coordinates and is not the same as its
 coordinates Vectors can represent different coordinates in different
-coordinate spaces through [<a href="#linear-transformation">linear
-transformation</a>].</p>
-<h2 id="basis-vectors">Basis Vectors</h2>
+coordinate spaces through [<a href="#linear-transformation">Linear
+Transformation</a>].</p>
+<h3 id="orthogonal-vectors">Orthogonal Vectors</h3>
+<p>Vector that is perpendicular to another vector or vector space. It
+has a dot product of zero with the other vector, or with all the vectors
+of the other vector space.</p>
+<h3 id="orthonormal-vectors">Orthonormal Vectors</h3>
+<p>[<a href="#orthogonal-vectors">Orthogonal Vectors</a>] with length
+1.</p>
+<h3 id="basis-vectors">Basis Vectors</h3>
 <p>Basis vectors of a [<a href="#vector-space">Vector Space</a>] are a
-set of [[Linearly Independent]] vectors that span the full space. Since
-a vector space can have infinitely many vectors, using the basis allows
-us to succinctly define and work with the VS.</p>
+set of [<a href="#linearly-independent">Linearly Independent</a>]
+vectors that span the full space. Since a vector space can have
+infinitely many vectors, using the basis allows us to succinctly define
+and work with the VS.</p>
 <p>Given S subset of V, S is basis of V if</p>
 <ul>
 <li>S is LI</li>
@@ -208,14 +84,101 @@ us to succinctly define and work with the VS.</p>
 <li>The elements of S are basis vectors</li>
 <li>MoML pg 57</li>
 </ul>
-<h3 id="orthormal-basis-onb">Orthormal Basis (ONB)</h3>
-<p>Basis vectors that are orthonormal (orthogonal and have length 1)</p>
+<h3 id="orthonormal-basis-onb">Orthonormal Basis (ONB)</h3>
+<p>Basis vectors that are orthonormal</p>
 <ul>
 <li>[<a href="#inner-product">inner product</a>] is 0 : &lt;b_i, b_j&gt;
 = 0 for i != j (orthogonal),</li>
 <li>&lt;b_i, b_i&gt; = 1 ; have length = 1</li>
 </ul>
-<h2 id="matrix">Matrix</h2>
+<p>Can be found by using [<a href="#gram-schmidt-algorithm">Gram-Schmidt
+algorithm</a>]</p>
+<h3 id="gram-schmidt-algorithm">Gram-Schmidt algorithm</h3>
+<p>An iterative method for constructing an [[Orthonormal Basis]] from a
+set of [<a href="#linearly-independent">Linearly Independent</a>]
+vectors. It works by orthogonalizing each vector with respect to the
+previous ones, then normalizing each resulting vector to have unit
+length.<span
+class="sidenote-wrapper"><label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span
+class="sidenote">See Jupyter notebook for an implementation<br />
+<br />
+</span></span></p>
+<h3 id="linear-combination">Linear Combination</h3>
+<p>A combination of scaling (multiplying) or adding vectors</p>
+<h3 id="norm">Norm</h3>
+<p>The magnitude of a vector from the origin. Common norms are:</p>
+<ul>
+<li>L1 (Manhattan): sum of absolute values</li>
+<li>L2 (Euclidean): square root of a sum of squares.</li>
+</ul>
+<p>Norms have three properties:</p>
+<ol type="1">
+<li>Non-negative</li>
+<li>Homogeneity: ||ax|| = ||a|| ||x|| for any scalar a</li>
+<li>Triangle inequality = ||x+y|| &lt;= ||x||+||y||</li>
+</ol>
+<p>Used in: Regularization, Optimization (Grad Descent), Loss functions,
+distance metrics, batch and layer normalization.</p>
+<h3 id="vector-space">Vector Space</h3>
+<p>The vector space defines a set V of vectors, a field F, vector
+addition, and scalar multiplication that follow a vector space axioms
+such as closure, associativity, identity elements, inverses, and
+distributive properties.</p>
+<p>For example, ℝ³ is a vector space.</p>
+<p>Can be described by the [[Basis]]</p>
+<h3 id="linearly-dependent">Linearly Dependent</h3>
+<p>A subset of vectors contains the zero vector or one of its vectors
+can be represented as a [<a href="#linear-combination">Linear
+Combination</a>] of other vectors. This implies there is a “redundant”
+vector in the set. Another definition would be if the null vector 0 can
+be obtained through linear combination. <span
+class="sidenote-wrapper"><label for="sn-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span
+class="sidenote">Theorem 2 from MoML<br />
+<br />
+</span></span></p>
+<h3 id="linearly-independent">Linearly Independent</h3>
+<p>No vectors in a set can be written as linear combinations other
+vectors in the set. Can be found by Gaussian Elimination and checking if
+there are no non-zero rows, calculating the determinant for a square
+matrix and checking if it is != 0, or if rank = # of vectors. If adding
+another vector increases the [<a href="#span">Span</a>] they are
+linearly independent.</p>
+<p>Another definition would be it is linearly independent iff when the
+sum of all vectors multiplied by coeffiencts is zero, all coefficients
+are zero<span
+class="sidenote-wrapper"><label for="sn-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-3" class="margin-toggle"/><span
+class="sidenote">Theorem 2 from MoML<br />
+<br />
+</span></span></p>
+<h3 id="span">Span</h3>
+<p>The span is all the vectors that can be reached by using a linear
+combination of a given set of vectors. Adding linearly dependent vectors
+does not increase the span.</p>
+<h3 id="inner-product">Inner Product</h3>
+<ul>
+<li>⟨u,v⟩→R</li>
+<li>A bilinear mapping that is symmetric and positive definite (always
+positive when applied to itself).</li>
+<li>Takes two vectors and returns a scalar.</li>
+<li>Measures length<span
+class="sidenote-wrapper"><label for="sn-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-4" class="margin-toggle"/><span
+class="sidenote">Distance between vectors for an inner product space (V,
+&lt;.,.&gt;) : d(x,y) := |x - y| = sqrt(&lt;x - y&gt;, &lt;x - y&gt;).
+Relates to [[L2 Norm]].<br />
+<br />
+</span></span> and angle<span
+class="sidenote-wrapper"><label for="sn-5" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-5" class="margin-toggle"/><span
+class="sidenote">cos w = &lt;x, y&gt; / (||x|| ||y||) by Cauchy-Schwartz
+Inequality<br />
+<br />
+</span></span> between them. If ⟨u,v⟩=0, then u⊥v, if ||x|| = 1 = ||y||
+it is also orthonormal.</li>
+<li>Generalization of [[Dot Product]]</li>
+<li>MML pg 73-76</li>
+</ul>
+</section>
+<section>
+<h2 id="matrices">Matrices</h2>
 <p>A matrix can be used to represent a series of linear equations. For
 example given the following linear equations:</p>
 <p><span class="math display">\[
@@ -230,17 +193,20 @@ x + 2y = 5
 \end{bmatrix}
 \]</span></p>
 <p>Any matrix can be geometrically viewed as a [<a
-href="#linear-transformation">Linear Transformation</a>]</p>
+href="#linear-transformation">Linear Transformation</a>]. In fact, you
+can create a 1:1 correspondence between a set of linear transformations
+<span class="math inline">\(f\)</span> and a matrix <span
+class="math inline">\(A\)</span> for a given basis. From this
+perspective a matrix is simply a representation of linear
+transformations relative to a given basis.</p>
 <h3 id="orthogonal-matrix">Orthogonal Matrix</h3>
 <ul>
-<li>Has columns that are [[orthnormal]], resulting in A^(-1) = A^T,
+<li>Has columns that are [[Orthonormal]], resulting in A^(-1) = A^T,
 which makes calculating the inverse efficient</li>
 <li>Results in a rotation when viewed as a linear transformation, the
-transformation is done relative to an [[orthonormal basis]]</li>
+transformation is done relative to an [[Orthonormal Basis]]</li>
 </ul>
-<h2 id="linear-combination">Linear Combination</h2>
-<p>A combination of scaling (multiplying) or adding vectors</p>
-<h2 id="linear-transformation">Linear Transformation</h2>
+<h3 id="linear-transformation">Linear Transformation</h3>
 <p>By multiplying a vector by a matrix, we can perform transformations
 of the vector. So geometrically a matrix represents a linear transform
 of a vector.</p>
@@ -250,8 +216,43 @@ of a vector.</p>
 <li>Origin stays the same</li>
 <li>Grid lines stay equally spaced and parallel</li>
 </ol>
-<p>The transformation can be described in terms of how the basis vector
-changes.</p>
+<p>The transformation can be represented by a matrix describes of how
+the basis vector changes. This creates a 1:1 correspondence between the
+transformation functions and the matrix which represents it. It can be
+compared to the allegory of caves, where the transformation is the
+reality and the matrix is the shadow representation of the
+transformation.</p>
+<p><strong>Definition (Matrix of a Linear Transformation)</strong></p>
+<p>Let <span class="math inline">\(V\)</span> and <span
+class="math inline">\(W\)</span> be finite-dimensional vector spaces
+over a field <span class="math inline">\(\mathbb{F}\)</span> with
+ordered bases <span class="math inline">\(\mathcal{B} = \{v_1, v_2,
+\ldots, v_n\}\)</span>for <span class="math inline">\(V\)</span> and
+<span class="math inline">\(\mathcal{C} = \{w_1, w_2, \ldots,
+w_m\}\)</span>for <span class="math inline">\(W\)</span> .</p>
+<p>Let <span class="math inline">\(T: V \to W\)</span> be a linear
+transformation. For each basis vector <span class="math inline">\(v*j
+\in \mathcal{B}\)</span>, there exist unique scalars <span
+class="math inline">\(a*{1j}, a*{2j}, \ldots, a*{mj} \in
+\mathbb{F}\)</span> such that</p>
+<p><span class="math display">\[
+T(v_j) = \sum_{i=1}^{m} a_{ij} w_i.
+\]</span></p>
+<p>The <strong>matrix of <span class="math inline">\(T\)</span> with
+respect to the bases () and ()</strong> is the <span
+class="math inline">\(m \times n\)</span> matrix</p>
+<p><span class="math display">\[
+[T]_{\mathcal{C} \leftarrow \mathcal{B}} =
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\\\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\\\
+a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}
+\end{bmatrix}.
+\]</span></p>
+<p>Each <strong>column</strong> of this matrix is the coordinate vector
+of <span class="math inline">\(T(v_j)\)</span> expressed in the basis
+<span class="math inline">\(\mathcal{C}\)</span>.</p>
 <ul>
 <li><a
 href="https://claude.ai/public/artifacts/ebfef9fb-c08b-48ca-a9ed-9ec68ef6ba6b">Interactive
@@ -259,113 +260,53 @@ Tool</a></li>
 <li><a href="https://www.youtube.com/watch?v=kYB8IZa5AuE">3 Blue 1 Brown
 video</a></li>
 </ul>
-<h2 id="vector-space">Vector Space</h2>
-<p>The vector space defines a set V of vectors, a field F, vector
-addition, and scalar multiplication that follow a vector space axioms
-such as closure, associativity, identity elements, inverses, and
-distributive properties.</p>
-<p>For example, ℝ³ is a vector space.</p>
-<p>Best described by the [[Basis]]</p>
-<h2 id="span">Span</h2>
-<p>The span is all the vectors that can be reached by using a linear
-combination of a given set of vectors. Adding linearly dependent vectors
-does not increase the span.</p>
-<h2 id="linear-dependence">Linear Dependence</h2>
-<p>A subset of vectors contains the zero vector or one of its vectors
-can be represented as a [<a href="#linear-combination">linear
-combination</a>] of other vectors. This implies there is a “redundant”
-vector in the set. Another definition would be if the null vector 0 can
-be obtained through linear combination. <span
-class="sidenote-wrapper"><label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span
-class="sidenote">Theorem 2 from MoML<br />
-<br />
-</span></span></p>
-<h2 id="linear-independence">Linear Independence</h2>
-<p>No vectors in a set can be written as linear combinations other
-vectors in the set. Can be found by Gaussian Elimination and checking if
-there are no non-zero rows, calculating the determinant for a square
-matrix and checking if it is != 0, or if rank = # of vectors. If adding
-another vector increases the [<a href="#span">Span</a>] they are
-linearly independent. Another definition would be it is linearly
-independent iff when the sum of all vectors multiplied by coeffiencts is
-zero, all coefficients are zero<span
-class="sidenote-wrapper"><label for="sn-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span
-class="sidenote">Theorem 2 from MoML<br />
-<br />
-</span></span></p>
-<h2 id="norm">Norm</h2>
-<p>The magnitude of a vector from the origin. Common norms are:</p>
-<ul>
-<li>L1 (Manhattan): sum of absolute values</li>
-<li>L2 (Euclidean): square root of a sum of squares.</li>
-</ul>
-<p>Norms have three properties:</p>
-<ol type="1">
-<li>Non-negative</li>
-<li>Homogeneity: ||ax|| = ||a|| ||x|| for any scalar a</li>
-<li>Triangle inequality = ||x+y|| &lt;= ||x||+||y||</li>
-</ol>
-<p>Used in: Regularization, Optimization (Grad Descent), Loss functions,
-distance metrics, batch and layer normalization.</p>
-<h2 id="inner-product">Inner Product</h2>
-<ul>
-<li>⟨u,v⟩→R</li>
-<li>A bilinear mapping that is symmetric and positive definite (always
-positive when applied to itself).</li>
-<li>Takes two vectors and returns a scalar.</li>
-<li>Measures length<span
-class="sidenote-wrapper"><label for="sn-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-3" class="margin-toggle"/><span
-class="sidenote">Distance between vectors for an inner product space (V,
-&lt;.,.&gt;) : d(x,y) := |x - y| = sqrt(&lt;x - y&gt;, &lt;x - y&gt;).
-Relates to [[L2 Norm]].<br />
-<br />
-</span></span> and angle<span
-class="sidenote-wrapper"><label for="sn-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-4" class="margin-toggle"/><span
-class="sidenote">cos w = &lt;x, y&gt; / (||x|| ||y||) by Cauchy-Schwartz
-Inequality<br />
-<br />
-</span></span> between them. If ⟨u,v⟩=0, then u⊥v, if ||x|| = 1 = ||y||
-it is also orthonormal.</li>
-<li>Generalization of [[Dot Product]]</li>
-<li>MML pg 73-76</li>
-</ul>
-<h2 id="determinant">Determinant</h2>
+<h3 id="determinant">Determinant</h3>
 <p>For a 2-D vector space, it gives the change in the area of a square
-created by the [[basis vector]]s. Change in volume for a cube in 3D.
+created by the [[Basis Vector]]s. Change in volume for a cube in 3D.
 When det = 0, it squishes the area down to a line or point, and
-indicates the matrix is [[linearly dependent]]. If det is negative,
+indicates the vectors of the matrix are [<a
+href="#linearly-dependent">Linearly Dependent</a>]. If det is negative,
 there is a “flip”, but the change in area is equivalent to the absolute
 value of the determinant. <span
-class="sidenote-wrapper"><label for="sn-5" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-5" class="margin-toggle"/><span
+class="sidenote-wrapper"><label for="sn-6" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-6" class="margin-toggle"/><span
 class="sidenote">Great video from 3b1b on this.<br />
 <br />
 </span></span></p>
 <p>The determinant can only be found for a square matrix.</p>
 <p>Calculating the determinant For 2D For 3D For nxn - reduce to 2x2</p>
-<h2 id="trace">Trace</h2>
+<h3 id="trace">Trace</h3>
 <p>The diagonal sum of the matrix</p>
-<h2 id="characteristic-polynomial">Characteristic Polynomial</h2>
+<h3 id="characteristic-polynomial">Characteristic Polynomial</h3>
 <p>For a square matrix: <span class="math display">\[P_a(\lambda) =
 det(A - \lambda I)\]</span> Used in calculating [<a
-href="#eigenvectors">Eigenvectors</a>]</p>
-<h2 id="eigenvectors-and-eigenvalues">Eigenvectors and Eigenvalues</h2>
-<ul>
-<li>Eigenvectors and values characterize the linear mapping of a square
-matrix.</li>
-</ul>
-<h3 id="eigenvectors">Eigenvectors</h3>
-<ul>
-<li>Eigenvectors point in the direction of the mapping</li>
-</ul>
-<h3 id="eigenvalues">Eigenvalues</h3>
-<ul>
-<li>Eigenvalues indicate how much the eigenvectors are stretched</li>
-</ul>
-<h3 id="calculations">Calculations</h3>
-<ul>
-<li>For a matrix A, eigenvector x, and eigenvalue <span
+href="#eigenvector">Eigenvector</a>]</p>
+<h3 id="eigenvectors-and-eigenvalues">Eigenvectors and Eigenvalues</h3>
+<p>Eigenvectors and values characterize the [<a
+href="#linear-transformation">Linear Transformation</a>] of a square
+matrix. The mathematical relationship is: <span
+class="math display">\[Av = \lambda v\]</span> where v is the
+eigenvector and <span class="math display">\[\lambda\]</span> is the
+eigenvalue.</p>
+<p><a
+href="https://claude.ai/public/artifacts/bc712e4f-70d5-4dba-8ff0-5d79695343f4">Visualization
+of Eigenvector and value</a></p>
+<h4 id="eigenvector">Eigenvector</h4>
+<p>Eigenvectors point in the directions that are preserved (or exactly
+reversed) by a linear transformation. While most vectors change both
+magnitude and direction when transformed, eigenvectors only change in
+magnitude by a factor equal to their corresponding eigenvalue.</p>
+<h4 id="eigenvalue">Eigenvalue</h4>
+<p>Eigenvalues indicate how much the eigenvectors are stretched as a
+result of the linear transformation. If the eigenvalue is 1 then there
+is no change, 0 means the eigenvector becomes the zero vector and
+reduces the dimensionality of the vector space. The number of zero
+eigenvalues indicates how much the dimensionality of the vector space is
+reduced.</p>
+<h4 id="calculation">Calculation</h4>
+<p>For a matrix A, eigenvector x, and eigenvalue <span
 class="math display">\[\lambda\]</span> : <span class="math display">\[
-Ax = \lambda x \]</span></li>
+Ax = \lambda x \]</span></p>
+<ul>
 <li><span class="math display">\[det(A - \lambda I_n = 0)\]</span></li>
 <li>If <span class="math inline">\(A \elem R^(nxn)\)</span> is
 symmetric, there is an [[ONB]] of the vector space with the eigenvector
@@ -377,8 +318,7 @@ the product of its eigenvalues: <span class="math display">\[det(A) =
 <li>Ties in the fact that the determinant calculates the area of the
 transformation with the eigenvalues.</li>
 </ul></li>
-<li>Solving for the [<a href="#eigenvalues">Eigenvalues</a>] and [<a
-href="#eigenvectors">Eigenvectors</a>]
+<li>Solving for the [[Eigenvalues]] and [[Eigenvectors]]
 <ol type="1">
 <li>Set [[Charateristic Polynomial]] = 0: <span
 class="math display">\[P_A(\lambda) = 0\]</span></li>
@@ -386,11 +326,16 @@ class="math display">\[P_A(\lambda) = 0\]</span></li>
 </ol></li>
 </ul>
 <h3 id="pagerank">PageRank</h3>
-<ul>
-<li>Uses the [[Eigenvector]] of the maximal [<a
-href="#eigenvalues">Eigenvalues</a>] to rank a page based on the
-incoming links and how important they are.</li>
-</ul>
+<p>Uses the [<a href="#eigenvector">Eigenvector</a>] of the maximal
+[[Eigenvalues]] to rank a page based on the incoming links and how
+important they are.</p>
+</section>
+<section>
+<h2 id="null-space">Null space</h2>
+<p>Has dimension equal to the number of zero [<a
+href="#eigenvalue">Eigenvalue</a>]s.</p>
+</section>
+<section>
 <h2 id="matrix-decomposition">Matrix Decomposition</h2>
 <p>Matrix decomposition breaks a matrix down into multiple factors, much
 like factoring an equation. The resulting components can describe
@@ -412,8 +357,12 @@ matrices.</p>
 <h3 id="singular-value-decomposition">Singular Value Decomposition</h3>
 <p>Can decompose any matrix into <span class="math inline">\(U \Sigma
 V^T\)</span></p>
+</section>
+<section>
 <h2 id="references">References</h2>
 <p>Math for Machine Learning (MML) Math of Machine Learning (MoML)
 3b1b</p>
+</section>
+</article>
 </body>
 </html>

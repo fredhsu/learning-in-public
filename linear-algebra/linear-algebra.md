@@ -53,7 +53,7 @@ Can be found by using [[Gram-Schmidt algorithm]]
 
 ### Gram-Schmidt algorithm
 
-An iterative method for constructing an [[Orthonormal Basis]] from a set of [[Linearly Independent]] vectors. It works by orthogonalizing each vector with respect to the previous ones, then normalizing each resulting vector to have unit length.[^GS-Jupyter]
+An iterative method for constructing an [[Orthonormal Basis]] from a set of [[Linearly Independent]] vectors. It works by orthogonalizing each vector with respect to the previous ones, then normalizing each resulting vector to have unit length.[^gsjupyter]
 
 ### Linear Combination
 
@@ -81,8 +81,7 @@ The vector space defines a set V of vectors, a field F, vector addition, and sca
 
 For example, ℝ³ is a vector space.
 
-Best described by the [[Basis]]
-
+Can be described by the [[Basis]]
 
 ### Linearly Dependent
 
@@ -95,6 +94,7 @@ Another definition would be if the null vector 0 can be obtained through linear 
 No vectors in a set can be written as linear combinations other vectors in the set.
 Can be found by Gaussian Elimination and checking if there are no non-zero rows, calculating the determinant for a square matrix and checking if it is != 0, or if rank = # of vectors.
 If adding another vector increases the [[Span]] they are linearly independent.
+
 Another definition would be it is linearly independent iff when the sum of all vectors multiplied by coeffiencts is zero, all coefficients are zero[^moml56]
 
 ### Span
@@ -132,9 +132,8 @@ Any matrix can be geometrically viewed as a [[Linear Transformation]]. In fact, 
 
 ### Orthogonal Matrix
 
-- Has columns that are [[orthnormal]], resulting in A^(-1) = A^T, which makes calculating the inverse efficient
-- Results in a rotation when viewed as a linear transformation, the transformation is done relative to an [[orthonormal basis]]
-
+- Has columns that are [[Orthonormal]], resulting in A^(-1) = A^T, which makes calculating the inverse efficient
+- Results in a rotation when viewed as a linear transformation, the transformation is done relative to an [[Orthonormal Basis]]
 
 ### Linear Transformation
 
@@ -146,7 +145,34 @@ Linear Transformations have the key properties:
 2. Origin stays the same
 3. Grid lines stay equally spaced and parallel
 
-The transformation can be described in terms of how the basis vector changes.
+The transformation can be represented by a matrix describes of how the basis vector changes. This creates a 1:1 correspondence between the transformation functions and the matrix which represents it. It can be compared to the allegory of caves, where the transformation is the reality and the matrix is the shadow representation of the transformation.
+
+**Definition (Matrix of a Linear Transformation)**
+
+Let $V$ and $W$ be finite-dimensional vector spaces over a field $\mathbb{F}$ with ordered bases
+$\mathcal{B} = \{v_1, v_2, \ldots, v_n\}$for $V$ and
+$\mathcal{C} = \{w_1, w_2, \ldots, w_m\}$for $W$ .
+
+Let $T: V \to W$ be a linear transformation. For each basis vector $v*j \in \mathcal{B}$, there exist unique scalars
+$a*{1j}, a*{2j}, \ldots, a*{mj} \in \mathbb{F}$ such that
+
+$$
+T(v_j) = \sum_{i=1}^{m} a_{ij} w_i.
+$$
+
+The **matrix of $T$ with respect to the bases \(\mathcal{B}\) and \(\mathcal{C}\)** is the $m \times n$ matrix
+
+$$
+[T]_{\mathcal{C} \leftarrow \mathcal{B}} =
+\begin{bmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\\\
+a_{21} & a_{22} & \cdots & a_{2n} \\\\
+\vdots & \vdots & \ddots & \vdots \\\\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{bmatrix}.
+$$
+
+Each **column** of this matrix is the coordinate vector of $T(v_j)$ expressed in the basis $\mathcal{C}$.
 
 - [Interactive Tool](https://claude.ai/public/artifacts/ebfef9fb-c08b-48ca-a9ed-9ec68ef6ba6b)
 - [3 Blue 1 Brown video](https://www.youtube.com/watch?v=kYB8IZa5AuE)
@@ -156,7 +182,7 @@ The transformation can be described in terms of how the basis vector changes.
 For a 2-D vector space, it gives the change in the area of a square created by the [[Basis Vector]]s. Change in volume for a cube in 3D.
 When det = 0, it squishes the area down to a line or point, and indicates the vectors of the matrix are [[Linearly Dependent]].
 If det is negative, there is a "flip", but the change in area is equivalent to the absolute value of the determinant.
-[^3b1b-det]
+[^3b1bdet]
 
 The determinant can only be found for a square matrix.
 
@@ -181,7 +207,7 @@ Eigenvectors and values characterize the [[Linear Transformation]] of a square m
 $$Av = \lambda v$$
 where v is the eigenvector and $$\lambda$$ is the eigenvalue.
 
-[Visualization of Eigenvector](https://claude.ai/public/artifacts/bc712e4f-70d5-4dba-8ff0-5d79695343f4)
+[Visualization of Eigenvector and value](https://claude.ai/public/artifacts/bc712e4f-70d5-4dba-8ff0-5d79695343f4)
 
 #### Eigenvector
 
@@ -194,6 +220,7 @@ Eigenvalues indicate how much the eigenvectors are stretched as a result of the 
 #### Calculation
 
 For a matrix A, eigenvector x, and eigenvalue $$\lambda$$ : $$ Ax = \lambda x $$
+
 - $$det(A - \lambda I_n = 0)$$
 - If $A \elem R^(nxn)$ is symmetric, there is an [[ONB]] of the vector space with the eigenvector of A and a real eigenvalue
 - The [[Determinant]] of a matrix is equal to the product of its eigenvalues: $$det(A) = \Pi i=1 to n \lambda_i$$
@@ -240,11 +267,12 @@ Math of Machine Learning (MoML)
 
 [^1]: I am using Pandoc and LaTeX to render some of this math. In this case pmatrix, bmatrix Bmatrix give parenthesis, brackets, braces matrix styles are useful latex options.
 
-[^3b1b-det]: Great video from 3b1b on this.
+[^3b1bdet]: Great video from 3b1b on this.
 
 [^3]: Distance between vectors for an inner product space (V, <.,.>) : d(x,y) := |x - y| = sqrt(<x - y>, <x - y>). Relates to [[L2 Norm]].
 
 [^4]: cos w = <x, y> / (||x|| ||y||) by Cauchy-Schwartz Inequality
 
 [^moml56]: Theorem 2 from MoML
-[^GS-Jupyter]: See Jupyter notebook for an implementation
+
+[^gsjupyter]: See Jupyter notebook for an implementation
