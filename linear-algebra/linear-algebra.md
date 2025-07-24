@@ -30,7 +30,7 @@ Vector that is perpendicular to another vector or vector space. It has a dot pro
 
 [[Orthogonal Vectors]] with length 1.
 
-### Basis Vectors
+### Basis Vector
 
 Basis vectors of a [[Vector Space]] are a set of [[Linearly Independent]] vectors that span the full space.
 Since a vector space can have infinitely many vectors, using the basis allows us to succinctly define and work with the VS.
@@ -81,7 +81,7 @@ The vector space defines a set V of vectors, a field F, vector addition, and sca
 
 For example, ℝ³ is a vector space.
 
-Can be described by the [[Basis]]
+Can be described by the [[Basis Vector]]
 
 ### Linearly Dependent
 
@@ -105,8 +105,9 @@ The span is all the vectors that can be reached by using a linear combination of
 
 - ⟨u,v⟩→R
 - A bilinear mapping that is symmetric and positive definite (always positive when applied to itself).
-- Takes two vectors and returns a scalar.
+- Takes two vectors and returns a scalar. $\langle x,y \rangle = x_1 y_1 + x_2 y_2$
 - Measures length[^3] and angle[^4] between them. If ⟨u,v⟩=0, then u⊥v, if ||x|| = 1 = ||y|| it is also orthonormal.
+- $\langle x,y \rangle = cos \| x \| \|y\| \alpha$
 - Generalization of [[Dot Product]]
 - MML pg 73-76
 
@@ -145,7 +146,7 @@ Linear Transformations have the key properties:
 2. Origin stays the same
 3. Grid lines stay equally spaced and parallel
 
-The transformation can be represented by a matrix describes of how the basis vector changes. This creates a 1:1 correspondence between the transformation functions and the matrix which represents it. It can be compared to the allegory of caves, where the transformation is the reality and the matrix is the shadow representation of the transformation.
+The transformation can be represented by a matrix describes of how the basis vector changes from the domain to the codomain. This creates a 1:1 correspondence between the transformation functions and the matrix which represents it. The values of the matrix are the images of the domain in the codomain. It can be compared to the allegory of caves, where the transformation is the reality and the matrix is the shadow representation of the transformation.
 
 **Definition (Matrix of a Linear Transformation)**
 
@@ -160,7 +161,7 @@ $$
 T(v_j) = \sum_{i=1}^{m} a_{ij} w_i.
 $$
 
-The **matrix of $T$ with respect to the bases \(\mathcal{B}\) and \(\mathcal{C}\)** is the $m \times n$ matrix
+The matrix of $T$ with respect to the bases $\mathcal{B}$ and $\mathcal{C}$ is the $m \times n$ matrix
 
 $$
 [T]_{\mathcal{C} \leftarrow \mathcal{B}} =
@@ -195,6 +196,54 @@ For nxn - reduce to 2x2
 
 The diagonal sum of the matrix
 
+### Injective
+
+A matrix is injective (one-to-one) if every input maps to a distinct output. This does not necessarily mean that all values in the co-domain are covered. In other words, every input gets mapped to one output, with no overlaps. If you know that x -> y, then if something else maps to y it must be equal to x. Injective also means $ker(A) = \{0\}$ the Kernel is equal to the zero vector. A matrix can only be injective if it is square or "tall" (m >= n). More formally:
+
+$f: A \rightarrow B$ is injective if:
+
+$$
+f(x_1) = f(x_2) \Rightarrow x_1 = x_2
+$$
+
+$$
+x_1 \neq x_2 \Rightarrow f(x_1) \neq f(x_2)
+$$
+
+### Surjective
+
+A matrix is surjective (onto) if every vector in the co-domain has a mapping from the domain. This could mean multiple inputs map to the same output, but every output must have a mapping from the input space. A matrix can only be surjective if it is square[^surjinjsquare] or "wide" (n <= m).
+This means $Ax=b$ has a solution for all $b \in R^m$ if $A$ is surjective.[^surj]
+Formally:
+
+$$
+\forall y \in B, \exists x \in A \text{ such that } f(x) = y
+$$
+
+### Bijective
+
+A matrix is bijective if it is both [[Injective]] and [[Surjective]]. A bijective mapping has an inverse, so it defines an [[invertable matrix]] and must be square. A bijective matrix preserves the structure during transformation allowing "change of variable" transformations.
+
+### Summary of Injective/Surjective/Bijective
+
+| Shape       | Transformation        | Injective?        | Surjective?           |
+| ----------- | --------------------- | ----------------- | --------------------- |
+| **2D → 2D** | Shear/rotate          | ✅ if no collapse | ✅ if spans output    |
+| **2D → 3D** | Plane floating in 3D  | ✅                | ❌                    |
+| **3D → 2D** | Flatten cube to plane | ❌                | ✅ if plane is filled |
+
+---
+
+| Matrix Shape       | Injective?  | Surjective? | Bijective? |
+| ------------------ | ----------- | ----------- | ---------- |
+| **Square (n = m)** | ✅ Yes      | ✅ Yes      | ✅ Yes     |
+| **Tall (m > n)**   | ✅ Possible | ❌ No       | ❌ No      |
+| **Wide (m < n)**   | ❌ No       | ✅ Possible | ❌ No      |
+
+### Invertible Matrix
+
+For a matrix to be invertible, there must be a mapping from each of vectors in the domain to the image of its inverse, i.e. it is [[Bijective]]. This means no non-zero vectors will be mapped to zero, only zero will map to zero.[^noninvertible] Invertible matrices allow stretching, rotating, etc. but preserves the dimensionality. The inverse is defined by: $AA^{-1} = I$
+
 ### Characteristic Polynomial
 
 For a square matrix:
@@ -205,7 +254,7 @@ Used in calculating [[Eigenvector]]
 
 Eigenvectors and values characterize the [[Linear Transformation]] of a square matrix. The mathematical relationship is:
 $$Av = \lambda v$$
-where v is the eigenvector and $$\lambda$$ is the eigenvalue.
+where v is the eigenvector and $\lambda$ is the eigenvalue.
 
 [Visualization of Eigenvector and value](https://claude.ai/public/artifacts/bc712e4f-70d5-4dba-8ff0-5d79695343f4)
 
@@ -219,19 +268,19 @@ Eigenvalues indicate how much the eigenvectors are stretched as a result of the 
 
 #### Calculation
 
-For a matrix A, eigenvector x, and eigenvalue $$\lambda$$ : $$ Ax = \lambda x $$
+For a matrix A, eigenvector x, and eigenvalue $\lambda$ : $Ax = \lambda x$
 
-- $$det(A - \lambda I_n = 0)$$
-- If $A \elem R^(nxn)$ is symmetric, there is an [[ONB]] of the vector space with the eigenvector of A and a real eigenvalue
-- The [[Determinant]] of a matrix is equal to the product of its eigenvalues: $$det(A) = \Pi i=1 to n \lambda_i$$
+- $det(A - \lambda I_n = 0)$
+- If $A \in R^{nxn}$ is symmetric, there is an [[ONB]] of the vector space with the eigenvector of A and a real eigenvalue
+- The [[Determinant]] of a matrix is equal to the product of its eigenvalues: $det(A) = \Pi i=1$ to $n \lambda_i$
   - Ties in the fact that the determinant calculates the area of the transformation with the eigenvalues.
-- Solving for the [[Eigenvalues]] and [[Eigenvectors]]
+- Solving for the [[Eigenvalue]] and [[Eigenvector]]
   1. Set [[Charateristic Polynomial]] = 0: $$P_A(\lambda) = 0$$
   2.
 
 ### PageRank
 
-Uses the [[Eigenvector]] of the maximal [[Eigenvalues]] to rank a page based on the incoming links and how important they are.
+Uses the [[Eigenvector]] of the maximal [[Eigenvalue]]s to rank a page based on the incoming links and how important they are.
 
 ## Null space
 
@@ -276,3 +325,13 @@ Math of Machine Learning (MoML)
 [^moml56]: Theorem 2 from MoML
 
 [^gsjupyter]: See Jupyter notebook for an implementation
+
+[^noninvertible]: Conversely, if the matrix is non-invertible, then it will collapse some part of its space to a lower dimension by mapping a non-zero vector to zero.
+
+[^surj]: Because everything in $b$ can be mapped to by A from something in $x$
+
+[^surjinjsquare]:
+    If a matrix is square and surjective, it is also injective because the number of columns of a square matrix is equal to the dimension of the domain (full rank) making the kernel trivial which is the definition of injective. This also makes it [[Bijective]] and therefore an [[Invertible Matrix]]
+
+    $$
+    $$
