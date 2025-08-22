@@ -32,8 +32,8 @@ Vector that is perpendicular to another vector or vector space. It has a dot pro
 
 ### Basis Vector
 
-Basis vectors of a [[Vector Space]] are a set of [[Linearly Independent]] vectors that span the full space.
-Since a vector space can have infinitely many vectors, using the basis allows us to succinctly define and work with the VS.
+Basis vectors of a [[Vector Space]] are a set of [[Linearly Independent]] vectors that span the entire vector space, so they can express all the vectors in the space.
+Since a vector space can have infinitely many vectors, using the basis allows us to succinctly define and work with the vector space.
 
 Given S subset of V, S is basis of V if
 
@@ -42,9 +42,9 @@ Given S subset of V, S is basis of V if
 - The elements of S are basis vectors
 - MoML pg 57
 
-### Orthonormal Basis (ONB)
+### Orthonormal Basis
 
-Basis vectors that are orthonormal
+Basis vectors that are [[Orthonormal Vectors]]
 
 - [[inner product]] is 0 : <b_i, b_j> = 0 for i != j (orthogonal),
 - <b_i, b_i> = 1 ; have length = 1
@@ -66,6 +66,7 @@ Common norms are:
 
 - L1 (Manhattan): sum of absolute values
 - L2 (Euclidean): square root of a sum of squares.
+- Supremum: $||x||_/infinity := max{|x_1|,...,|x_n|}$
 
 Norms have three properties:
 
@@ -74,6 +75,9 @@ Norms have three properties:
 3. Triangle inequality = ||x+y|| <= ||x||+||y||
 
 Used in: Regularization, Optimization (Grad Descent), Loss functions, distance metrics, batch and layer normalization.
+
+Can be used to define distance by taking the norm of the difference:
+$d(x,y) = ||x - y||$
 
 ### Vector Space
 
@@ -109,6 +113,7 @@ The span is all the vectors that can be reached by using a linear combination of
 - Measures length[^3] and angle[^4] between them. If ⟨u,v⟩=0, then u⊥v, if ||x|| = 1 = ||y|| it is also orthonormal.
 - $\langle x,y \rangle = cos \| x \| \|y\| \alpha$
 - Generalization of [[Dot Product]]
+- Also defines the L2 [[Norm]] : $||x|| = \langle x,x \rangle$
 - MML pg 73-76
 
 ## Matrices
