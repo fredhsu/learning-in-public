@@ -46,7 +46,9 @@ From a networking perspective from a AI/ML perspective</p>
 multiple interpretations from physics, to computer science, and
 mathematics. For our purposes we will use assume they represent a line
 that begins at the origin, and goes to the point represented by the
-vector. They are represented<span
+vector. In mathematics, a vector is defined as an element of a [<a
+href="#vector-space">Vector Space</a>], and is defined by their
+operations (see below). They are represented<span
 class="sidenote-wrapper"><label for="sn-0" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-0" class="margin-toggle"/><span
 class="sidenote">I am using Pandoc and LaTeX to render some of this
 math. In this case pmatrix, bmatrix Bmatrix give parenthesis, brackets,
@@ -66,17 +68,22 @@ coordinate spaces through [<a href="#linear-transformation">Linear
 Transformation</a>].</p>
 <h3 id="orthogonal-vectors">Orthogonal Vectors</h3>
 <p>Vector that is perpendicular to another vector or vector space. It
-has a dot product of zero with the other vector, or with all the vectors
-of the other vector space.</p>
+has a <a href="#inner-product">Inner Product</a><span
+class="sidenote-wrapper"><label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span
+class="sidenote">Dot product if its a real vector<br />
+<br />
+</span></span> of zero with the other vector, or with all the vectors of
+the other vector space.</p>
 <h3 id="orthonormal-vectors">Orthonormal Vectors</h3>
 <p>[<a href="#orthogonal-vectors">Orthogonal Vectors</a>] with length
 1.</p>
 <h3 id="basis-vector">Basis Vector</h3>
 <p>Basis vectors of a [<a href="#vector-space">Vector Space</a>] are a
 set of [<a href="#linearly-independent">Linearly Independent</a>]
-vectors that span the full space. Since a vector space can have
-infinitely many vectors, using the basis allows us to succinctly define
-and work with the VS.</p>
+vectors that span the entire vector space, so they can express all the
+vectors in the space. Since a vector space can have infinitely many
+vectors, using the basis allows us to succinctly define and work with
+the vector space.</p>
 <p>Given S subset of V, S is basis of V if</p>
 <ul>
 <li>S is LI</li>
@@ -84,8 +91,52 @@ and work with the VS.</p>
 <li>The elements of S are basis vectors</li>
 <li>MoML pg 57</li>
 </ul>
-<h3 id="orthonormal-basis-onb">Orthonormal Basis (ONB)</h3>
-<p>Basis vectors that are orthonormal</p>
+<h3 id="orthonormal-basis">Orthonormal Basis</h3>
+<p>The standard basis would have a vector with 1 in each dimension. For
+example <span class="math inline">\([1,0] [0,1]\)</span>. Changing the
+basis does not actually change the vectors, but changes how they are
+described.</p>
+<p>Some reasons you may want to change the basis:</p>
+<table>
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Goal</th>
+<th>What You Gain</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Simplify matrix computations</td>
+<td>Diagonal or block-diagonal matrices</td>
+</tr>
+<tr class="even">
+<td>Align with symmetry</td>
+<td>Cleaner equations, better insight</td>
+</tr>
+<tr class="odd">
+<td>Reduce dimensions (PCA)</td>
+<td>Compress data, denoise</td>
+</tr>
+<tr class="even">
+<td>Improve numerical stability</td>
+<td>Fewer round-off errors</td>
+</tr>
+<tr class="odd">
+<td>Easier geometric understanding</td>
+<td>Vectors align with physical intuition</td>
+</tr>
+<tr class="even">
+<td>Animate or transform objects</td>
+<td>Efficient manipulation of scenes</td>
+</tr>
+</tbody>
+</table>
+<p>Basis vectors that are [<a href="#orthonormal-vectors">Orthonormal
+Vectors</a>]</p>
 <ul>
 <li>[<a href="#inner-product">inner product</a>] is 0 : &lt;b_i, b_j&gt;
 = 0 for i != j (orthogonal),</li>
@@ -94,22 +145,26 @@ and work with the VS.</p>
 <p>Can be found by using [<a href="#gram-schmidt-algorithm">Gram-Schmidt
 algorithm</a>]</p>
 <h3 id="gram-schmidt-algorithm">Gram-Schmidt algorithm</h3>
-<p>An iterative method for constructing an [[Orthonormal Basis]] from a
-set of [<a href="#linearly-independent">Linearly Independent</a>]
-vectors. It works by orthogonalizing each vector with respect to the
-previous ones, then normalizing each resulting vector to have unit
-length.<span
-class="sidenote-wrapper"><label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span
+<p>An iterative method for constructing an [<a
+href="#orthonormal-basis">Orthonormal Basis</a>] from a set of [<a
+href="#linearly-independent">Linearly Independent</a>] vectors. It works
+by orthogonalizing each vector with respect to the previous ones, then
+normalizing each resulting vector to have unit length.<span
+class="sidenote-wrapper"><label for="sn-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span
 class="sidenote">See Jupyter notebook for an implementation<br />
 <br />
 </span></span></p>
 <h3 id="linear-combination">Linear Combination</h3>
 <p>A combination of scaling (multiplying) or adding vectors</p>
 <h3 id="norm">Norm</h3>
-<p>The magnitude of a vector from the origin. Common norms are:</p>
+<p>The magnitude of a vector from the origin. General form of a norm:
+<span class="math inline">\(||x||_p =
+(\sum_{i=1}^{n}{|x_i|^p})^{1/p}\)</span> Common norms are:</p>
 <ul>
 <li>L1 (Manhattan): sum of absolute values</li>
 <li>L2 (Euclidean): square root of a sum of squares.</li>
+<li>Supremum: <span class="math inline">\(||x||_/infinity :=
+max{|x_1|,...,|x_n|}\)</span></li>
 </ul>
 <p>Norms have three properties:</p>
 <ol type="1">
@@ -118,7 +173,10 @@ class="sidenote">See Jupyter notebook for an implementation<br />
 <li>Triangle inequality = ||x+y|| &lt;= ||x||+||y||</li>
 </ol>
 <p>Used in: Regularization, Optimization (Grad Descent), Loss functions,
-distance metrics, batch and layer normalization.</p>
+distance metrics, batch and layer normalization. [[Mean Squared Error]]
+is a scaled L2 norm between a prediction and the truth.</p>
+<p>Can be used to define distance by taking the norm of the difference:
+<span class="math inline">\(d(x,y) = ||x - y||\)</span></p>
 <h3 id="vector-space">Vector Space</h3>
 <p>The vector space defines a set V of vectors, a field F, vector
 addition, and scalar multiplication that follow a vector space axioms
@@ -133,7 +191,7 @@ can be represented as a [<a href="#linear-combination">Linear
 Combination</a>] of other vectors. This implies there is a “redundant”
 vector in the set. Another definition would be if the null vector 0 can
 be obtained through linear combination. <span
-class="sidenote-wrapper"><label for="sn-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span
+class="sidenote-wrapper"><label for="sn-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-3" class="margin-toggle"/><span
 class="sidenote">Theorem 2 from MoML<br />
 <br />
 </span></span></p>
@@ -147,7 +205,7 @@ linearly independent.</p>
 <p>Another definition would be it is linearly independent iff when the
 sum of all vectors multiplied by coeffiencts is zero, all coefficients
 are zero<span
-class="sidenote-wrapper"><label for="sn-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-3" class="margin-toggle"/><span
+class="sidenote-wrapper"><label for="sn-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-4" class="margin-toggle"/><span
 class="sidenote">Theorem 2 from MoML<br />
 <br />
 </span></span></p>
@@ -164,13 +222,13 @@ positive when applied to itself).</li>
 class="math inline">\(\langle x,y \rangle = x_1 y_1 + x_2
 y_2\)</span></li>
 <li>Measures length<span
-class="sidenote-wrapper"><label for="sn-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-4" class="margin-toggle"/><span
+class="sidenote-wrapper"><label for="sn-5" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-5" class="margin-toggle"/><span
 class="sidenote">Distance between vectors for an inner product space (V,
 &lt;.,.&gt;) : d(x,y) := |x - y| = sqrt(&lt;x - y&gt;, &lt;x - y&gt;).
 Relates to [[L2 Norm]].<br />
 <br />
 </span></span> and angle<span
-class="sidenote-wrapper"><label for="sn-5" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-5" class="margin-toggle"/><span
+class="sidenote-wrapper"><label for="sn-6" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-6" class="margin-toggle"/><span
 class="sidenote">cos w = &lt;x, y&gt; / (||x|| ||y||) by Cauchy-Schwartz
 Inequality<br />
 <br />
@@ -178,9 +236,31 @@ Inequality<br />
 it is also orthonormal.</li>
 <li><span class="math inline">\(\langle x,y \rangle = cos \| x \| \|y\|
 \alpha\)</span></li>
-<li>Generalization of [[Dot Product]]</li>
+<li>Generalization of [<a href="#dot-product">Dot Product</a>]</li>
+<li>Also defines the L2 [<a href="#norm">Norm</a>] : <span
+class="math inline">\(||x|| = \langle x,x \rangle\)</span></li>
 <li>MML pg 73-76</li>
+<li>Linearity of the first variable: <span class="math inline">\(\langle
+ax + y, z \rangle = a\langle x,z\rangle + \langle
+y,z\rangle\)</span></li>
 </ul>
+<h3 id="dot-product">Dot Product</h3>
+<p><span class="math inline">\(\langle x,y \rangle = \sum_{i=1}^{n}{x_i
+y_i}\)</span> in n-dimensional Euclidean space</p>
+<h3 id="cauchy-schwartz-inequality">Cauchy-Schwartz inequality</h3>
+<p><span class="math inline">\(|\langle x,y \rangle|^2 \leq \langle x,x
+\rangle \langle y,y \rangle\)</span></p>
+<h3 id="projection">Projection</h3>
+<p>A linear map that maps a vector space to another subspace. It is the
+same if you apply it once or twice: <span
+class="math inline">\(P^2=P\)</span></p>
+<p><span class="math inline">\(proj_y (x) = \frac{\langle x,y
+\rangle}{\langle y,y \rangle} y\)</span></p>
+<p>It can be used to reduce the number of dimensions, particularly with
+[Orthogonal Projections]</p>
+<h3 id="orthogonal-projection">Orthogonal Projection</h3>
+<p>Provides the shortest distance between a vector and a subspace by
+providing a point that is perpendicular to the subspace.</p>
 </section>
 <section>
 <h2 id="matrices">Matrices</h2>
@@ -209,7 +289,8 @@ transformations relative to a given basis.</p>
 <li>Has columns that are [[Orthonormal]], resulting in A^(-1) = A^T,
 which makes calculating the inverse efficient</li>
 <li>Results in a rotation when viewed as a linear transformation, the
-transformation is done relative to an [[Orthonormal Basis]]</li>
+transformation is done relative to an [<a
+href="#orthonormal-basis">Orthonormal Basis</a>]</li>
 </ul>
 <h3 id="linear-transformation">Linear Transformation</h3>
 <p>By multiplying a vector by a matrix, we can perform transformations
@@ -268,17 +349,20 @@ Tool</a></li>
 video</a></li>
 </ul>
 <h3 id="determinant">Determinant</h3>
-<p>For a 2-D vector space, it gives the change in the area of a square
+<ul>
+<li>For a 2-D vector space, it gives the change in the area of a square
 created by the [<a href="#basis-vector">Basis Vector</a>]s. Change in
-volume for a cube in 3D. When det = 0, it squishes the area down to a
-line or point, and indicates the vectors of the matrix are [<a
-href="#linearly-dependent">Linearly Dependent</a>]. If det is negative,
-there is a “flip”, but the change in area is equivalent to the absolute
-value of the determinant. <span
-class="sidenote-wrapper"><label for="sn-6" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-6" class="margin-toggle"/><span
+volume for a cube in 3D.</li>
+<li>When det = 0, it squishes the area down to a line or point, and
+indicates the vectors of the matrix are [<a
+href="#linearly-dependent">Linearly Dependent</a>].</li>
+<li>If det is negative, there is a “flip”, but the change in area is
+equivalent to the absolute value of the determinant. <span
+class="sidenote-wrapper"><label for="sn-7" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-7" class="margin-toggle"/><span
 class="sidenote">Great video from 3b1b on this.<br />
 <br />
-</span></span></p>
+</span></span></li>
+</ul>
 <p>The determinant can only be found for a square matrix.</p>
 <p>Calculating the determinant For 2D For 3D For nxn - reduce to 2x2</p>
 <h3 id="trace">Trace</h3>
@@ -305,7 +389,7 @@ x_1 \neq x_2 \Rightarrow f(x_1) \neq f(x_2)
 mapping from the domain. This could mean multiple inputs map to the same
 output, but every output must have a mapping from the input space. A
 matrix can only be surjective if it is square<span
-class="sidenote-wrapper"><label for="sn-7" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-7" class="margin-toggle"/><span
+class="sidenote-wrapper"><label for="sn-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-8" class="margin-toggle"/><span
 class="sidenote">If a matrix is square and surjective, it is also
 injective because the number of columns of a square matrix is equal to
 the dimension of the domain (full rank) making the kernel trivial which
@@ -313,14 +397,11 @@ is the definition of injective. This also makes it [<a
 href="#bijective">Bijective</a>] and therefore an [<a
 href="#invertible-matrix">Invertible Matrix</a>]<br />
 <br />
-<span class="math display">\[
-\]</span><br />
-<br />
 </span></span> or “wide” (n &lt;= m). This means <span
 class="math inline">\(Ax=b\)</span> has a solution for all <span
 class="math inline">\(b \in R^m\)</span> if <span
 class="math inline">\(A\)</span> is surjective.<span
-class="sidenote-wrapper"><label for="sn-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-8" class="margin-toggle"/><span
+class="sidenote-wrapper"><label for="sn-9" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-9" class="margin-toggle"/><span
 class="sidenote">Because everything in <span
 class="math inline">\(b\)</span> can be mapped to by A from something in
 <span class="math inline">\(x\)</span><br />
@@ -410,7 +491,7 @@ Injective/Surjective/Bijective</h3>
 vectors in the domain to the image of its inverse, i.e. it is [<a
 href="#bijective">Bijective</a>]. This means no non-zero vectors will be
 mapped to zero, only zero will map to zero.<span
-class="sidenote-wrapper"><label for="sn-9" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-9" class="margin-toggle"/><span
+class="sidenote-wrapper"><label for="sn-10" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-10" class="margin-toggle"/><span
 class="sidenote">Conversely, if the matrix is non-invertible, then it
 will collapse some part of its space to a lower dimension by mapping a
 non-zero vector to zero.<br />
@@ -421,7 +502,8 @@ class="math inline">\(AA^{-1} = I\)</span></p>
 <h3 id="characteristic-polynomial">Characteristic Polynomial</h3>
 <p>For a square matrix: <span class="math display">\[P_a(\lambda) =
 det(A - \lambda I)\]</span> Used in calculating [<a
-href="#eigenvector">Eigenvector</a>]</p>
+href="#eigenvector">Eigenvector</a>] by solving for <span
+class="math inline">\(P_a(\lambda) = 0\)</span>.</p>
 <h3 id="eigenvectors-and-eigenvalues">Eigenvectors and Eigenvalues</h3>
 <p>Eigenvectors and values characterize the [<a
 href="#linear-transformation">Linear Transformation</a>] of a square
@@ -431,7 +513,13 @@ eigenvector and <span class="math inline">\(\lambda\)</span> is the
 eigenvalue.</p>
 <p><a
 href="https://claude.ai/public/artifacts/bc712e4f-70d5-4dba-8ff0-5d79695343f4">Visualization
-of Eigenvector and value</a></p>
+of Eigenvector and value</a> One of the motivations for finding the
+eigenvalues and eigenvectors is it can simplify the linear
+transformation such as finding a diagonal matrix equivalent (<span
+class="math inline">\(A=PDP^{-1}\)</span>)of the matrix for more
+efficient calculations. When matrix is broken down into eigenvalues and
+eigenvectors, the basis becomes just scaling, no shear, rotation, or
+stretch.</p>
 <h4 id="eigenvector">Eigenvector</h4>
 <p>Eigenvectors point in the directions that are preserved (or exactly
 reversed) by a linear transformation. While most vectors change both
@@ -464,8 +552,10 @@ transformation with the eigenvalues.</li>
 href="#eigenvector">Eigenvector</a>]
 <ol type="1">
 <li>Set [[Charateristic Polynomial]] = 0: <span
-class="math display">\[P_A(\lambda) = 0\]</span></li>
-<li></li>
+class="math display">\[P_A(\lambda) = 0\]</span> solving for the
+Eigenvalues</li>
+<li>Use Eignevalues to then find Eigenvectors by solving: <span
+class="math display">\[(A-\lambda_i I)v_i = 0\]</span></li>
 </ol></li>
 </ul>
 <h3 id="pagerank">PageRank</h3>

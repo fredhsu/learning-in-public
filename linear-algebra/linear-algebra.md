@@ -10,7 +10,7 @@ from a AI/ML perspective
 ## Vectors
 
 Vectors are a fundamental concept in linear algebra and can have multiple interpretations from physics, to computer science, and mathematics. For our purposes we will use assume they represent a line that begins at the origin, and goes to the point represented by the vector.
-In mathematics, a vector is defined as an element of a [[Vector Space]], and is defined by their ability to be added or multiplied by scalars.
+In mathematics, a vector is defined as an element of a [[Vector Space]], and is defined by their operations (see below).
 They are represented[^1] like this:
 
 $\begin{bmatrix} 1 \\ 2 \end{bmatrix}$
@@ -25,7 +25,7 @@ Vectors can represent different coordinates in different coordinate spaces throu
 
 ### Orthogonal Vectors
 
-Vector that is perpendicular to another vector or vector space. It has a dot product of zero with the other vector, or with all the vectors of the other vector space.
+Vector that is perpendicular to another vector or vector space. It has a [Inner Product][^dotprod] of zero with the other vector, or with all the vectors of the other vector space.
 
 ### Orthonormal Vectors
 
@@ -76,6 +76,8 @@ A combination of scaling (multiplying) or adding vectors
 ### Norm
 
 The magnitude of a vector from the origin.
+General form of a norm:
+$||x||_p = (\sum_{i=1}^{n}{|x_i|^p})^{1/p}$
 Common norms are:
 
 - L1 (Manhattan): sum of absolute values
@@ -88,7 +90,7 @@ Norms have three properties:
 2. Homogeneity: ||ax|| = ||a|| ||x|| for any scalar a
 3. Triangle inequality = ||x+y|| <= ||x||+||y||
 
-Used in: Regularization, Optimization (Grad Descent), Loss functions, distance metrics, batch and layer normalization.
+Used in: Regularization, Optimization (Grad Descent), Loss functions, distance metrics, batch and layer normalization. [[Mean Squared Error]] is a scaled L2 norm between a prediction and the truth.
 
 Can be used to define distance by taking the norm of the difference:
 $d(x,y) = ||x - y||$
@@ -129,6 +131,28 @@ The span is all the vectors that can be reached by using a linear combination of
 - Generalization of [[Dot Product]]
 - Also defines the L2 [[Norm]] : $||x|| = \langle x,x \rangle$
 - MML pg 73-76
+- Linearity of the first variable: $\langle ax + y, z \rangle = a\langle x,z\rangle + \langle y,z\rangle$
+
+### Dot Product
+
+$\langle x,y \rangle = \sum_{i=1}^{n}{x_i y_i}$ in n-dimensional Euclidean space
+
+### Cauchy-Schwartz inequality
+
+$|\langle x,y \rangle|^2 \leq \langle x,x \rangle \langle y,y \rangle$
+
+### Projection
+
+A linear map that maps a vector space to another subspace. It is the same if you apply it once or twice:
+$P^2=P$
+
+$proj_y (x) = \frac{\langle x,y \rangle}{\langle y,y \rangle} y$
+
+It can be used to reduce the number of dimensions, particularly with an [[Orthogonal Projection]].
+
+### Orthogonal Projection
+
+Provides the shortest distance between a vector and a subspace by providing a point that is perpendicular to the subspace.
 
 ## Matrices
 
@@ -337,6 +361,8 @@ Math of Machine Learning (MoML)
 [^1]: I am using Pandoc and LaTeX to render some of this math. In this case pmatrix, bmatrix Bmatrix give parenthesis, brackets, braces matrix styles are useful latex options.
 
 [^3b1bdet]: Great video from 3b1b on this.
+
+[^dotprod]: Dot product if its a real vector
 
 [^3]: Distance between vectors for an inner product space (V, <.,.>) : d(x,y) := |x - y| = sqrt(<x - y>, <x - y>). Relates to [[L2 Norm]].
 
