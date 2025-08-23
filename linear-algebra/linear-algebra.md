@@ -10,6 +10,7 @@ from a AI/ML perspective
 ## Vectors
 
 Vectors are a fundamental concept in linear algebra and can have multiple interpretations from physics, to computer science, and mathematics. For our purposes we will use assume they represent a line that begins at the origin, and goes to the point represented by the vector.
+In mathematics, a vector is defined as an element of a [[Vector Space]], and is defined by their ability to be added or multiplied by scalars.
 They are represented[^1] like this:
 
 $\begin{bmatrix} 1 \\ 2 \end{bmatrix}$
@@ -43,6 +44,19 @@ Given S subset of V, S is basis of V if
 - MoML pg 57
 
 ### Orthonormal Basis
+
+The standard basis would have a vector with 1 in each dimension. For example $[1,0] [0,1]$. Changing the basis does not actually change the vectors, but changes how they are described.
+
+Some reasons you may want to change the basis:
+
+| Goal                           | What You Gain                         |
+| ------------------------------ | ------------------------------------- |
+| Simplify matrix computations   | Diagonal or block-diagonal matrices   |
+| Align with symmetry            | Cleaner equations, better insight     |
+| Reduce dimensions (PCA)        | Compress data, denoise                |
+| Improve numerical stability    | Fewer round-off errors                |
+| Easier geometric understanding | Vectors align with physical intuition |
+| Animate or transform objects   | Efficient manipulation of scenes      |
 
 Basis vectors that are [[Orthonormal Vectors]]
 
@@ -185,10 +199,10 @@ Each **column** of this matrix is the coordinate vector of $T(v_j)$ expressed in
 
 ### Determinant
 
-For a 2-D vector space, it gives the change in the area of a square created by the [[Basis Vector]]s. Change in volume for a cube in 3D.
-When det = 0, it squishes the area down to a line or point, and indicates the vectors of the matrix are [[Linearly Dependent]].
-If det is negative, there is a "flip", but the change in area is equivalent to the absolute value of the determinant.
-[^3b1bdet]
+- For a 2-D vector space, it gives the change in the area of a square created by the [[Basis Vector]]s. Change in volume for a cube in 3D.
+- When det = 0, it squishes the area down to a line or point, and indicates the vectors of the matrix are [[Linearly Dependent]].
+- If det is negative, there is a "flip", but the change in area is equivalent to the absolute value of the determinant.
+  [^3b1bdet]
 
 The determinant can only be found for a square matrix.
 
@@ -253,7 +267,7 @@ For a matrix to be invertible, there must be a mapping from each of vectors in t
 
 For a square matrix:
 $$P_a(\lambda) = det(A - \lambda I)$$
-Used in calculating [[Eigenvector]]
+Used in calculating [[Eigenvector]] by solving for $P_a(\lambda) = 0$.
 
 ### Eigenvectors and Eigenvalues
 
@@ -262,6 +276,7 @@ $$Av = \lambda v$$
 where v is the eigenvector and $\lambda$ is the eigenvalue.
 
 [Visualization of Eigenvector and value](https://claude.ai/public/artifacts/bc712e4f-70d5-4dba-8ff0-5d79695343f4)
+One of the motivations for finding the eigenvalues and eigenvectors is it can simplify the linear transformation such as finding a diagonal matrix equivalent ($A=PDP^{-1}$)of the matrix for more efficient calculations. When matrix is broken down into eigenvalues and eigenvectors, the basis becomes just scaling, no shear, rotation, or stretch.
 
 #### Eigenvector
 
@@ -280,8 +295,8 @@ For a matrix A, eigenvector x, and eigenvalue $\lambda$ : $Ax = \lambda x$
 - The [[Determinant]] of a matrix is equal to the product of its eigenvalues: $det(A) = \Pi i=1$ to $n \lambda_i$
   - Ties in the fact that the determinant calculates the area of the transformation with the eigenvalues.
 - Solving for the [[Eigenvalue]] and [[Eigenvector]]
-  1. Set [[Charateristic Polynomial]] = 0: $$P_A(\lambda) = 0$$
-  2.
+  1. Set [[Charateristic Polynomial]] = 0: $$P_A(\lambda) = 0$$ solving for the Eigenvalues
+  2. Use Eignevalues to then find Eigenvectors by solving: $$(A-\lambda_i I)v_i = 0$$
 
 ### PageRank
 
@@ -335,8 +350,4 @@ Math of Machine Learning (MoML)
 
 [^surj]: Because everything in $b$ can be mapped to by A from something in $x$
 
-[^surjinjsquare]:
-    If a matrix is square and surjective, it is also injective because the number of columns of a square matrix is equal to the dimension of the domain (full rank) making the kernel trivial which is the definition of injective. This also makes it [[Bijective]] and therefore an [[Invertible Matrix]]
-
-    $$
-    $$
+[^surjinjsquare]: If a matrix is square and surjective, it is also injective because the number of columns of a square matrix is equal to the dimension of the domain (full rank) making the kernel trivial which is the definition of injective. This also makes it [[Bijective]] and therefore an [[Invertible Matrix]]
