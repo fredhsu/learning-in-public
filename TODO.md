@@ -1,0 +1,3 @@
+- consider using Caddy server to host
+- check/refine linking between cards
+- try local LLM
