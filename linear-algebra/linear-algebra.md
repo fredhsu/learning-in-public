@@ -152,7 +152,9 @@ It can be used to reduce the number of dimensions, particularly with an [[Orthog
 
 ### Orthogonal Projection
 
-Provides the shortest distance between a vector and a subspace by providing a point that is perpendicular to the subspace.
+- Provides the shortest distance between a vector and a subspace by providing a point that is perpendicular to the subspace.
+- If you think of an orthogonal projection forming a right triangle between the vectors, you can apply the law of cosines to find the angle between the two vectors.
+- By combining orthogonal projection (to get the adjacent side) with the law of cosines (to relate lengths and angles), you can compute the ratio of projection length to vector length, and that ratio is _cosine similarity_[^cosinesim] : how much of a one vector lies in the direction of another measured by the angle between the vectors.
 
 ## Matrices
 
@@ -377,3 +379,5 @@ Math of Machine Learning (MoML)
 [^surj]: Because everything in $b$ can be mapped to by A from something in $x$
 
 [^surjinjsquare]: If a matrix is square and surjective, it is also injective because the number of columns of a square matrix is equal to the dimension of the domain (full rank) making the kernel trivial which is the definition of injective. This also makes it [[Bijective]] and therefore an [[Invertible Matrix]]
+
+[^cosinesim]: $cos \langle x,y \rangle = \langle \frac{x}{||x||} , \frac{y}{||y||} \rangle$

@@ -257,10 +257,24 @@ class="math inline">\(P^2=P\)</span></p>
 <p><span class="math inline">\(proj_y (x) = \frac{\langle x,y
 \rangle}{\langle y,y \rangle} y\)</span></p>
 <p>It can be used to reduce the number of dimensions, particularly with
-[Orthogonal Projections]</p>
+an [<a href="#orthogonal-projection">Orthogonal Projection</a>].</p>
 <h3 id="orthogonal-projection">Orthogonal Projection</h3>
-<p>Provides the shortest distance between a vector and a subspace by
-providing a point that is perpendicular to the subspace.</p>
+<ul>
+<li>Provides the shortest distance between a vector and a subspace by
+providing a point that is perpendicular to the subspace.</li>
+<li>If you think of an orthogonal projection forming a right triangle
+between the vectors, you can apply the law of cosines to find the angle
+between a vector and its projection.</li>
+<li>By combining orthogonal projection (to get the adjacent side) with
+the law of cosines (to relate lengths and angles), you can compute the
+ratio of projection length to vector length, and that ratio is Cosine
+Similarity<span
+class="sidenote-wrapper"><label for="sn-7" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-7" class="margin-toggle"/><span
+class="sidenote"><span class="math inline">\(cos \langle x,y \rangle =
+\langle \frac{x}{||x||} , \frac{y}{||y||} \rangle\)</span><br />
+<br />
+</span></span>.</li>
+</ul>
 </section>
 <section>
 <h2 id="matrices">Matrices</h2>
@@ -358,7 +372,7 @@ indicates the vectors of the matrix are [<a
 href="#linearly-dependent">Linearly Dependent</a>].</li>
 <li>If det is negative, there is a “flip”, but the change in area is
 equivalent to the absolute value of the determinant. <span
-class="sidenote-wrapper"><label for="sn-7" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-7" class="margin-toggle"/><span
+class="sidenote-wrapper"><label for="sn-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-8" class="margin-toggle"/><span
 class="sidenote">Great video from 3b1b on this.<br />
 <br />
 </span></span></li>
@@ -389,7 +403,7 @@ x_1 \neq x_2 \Rightarrow f(x_1) \neq f(x_2)
 mapping from the domain. This could mean multiple inputs map to the same
 output, but every output must have a mapping from the input space. A
 matrix can only be surjective if it is square<span
-class="sidenote-wrapper"><label for="sn-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-8" class="margin-toggle"/><span
+class="sidenote-wrapper"><label for="sn-9" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-9" class="margin-toggle"/><span
 class="sidenote">If a matrix is square and surjective, it is also
 injective because the number of columns of a square matrix is equal to
 the dimension of the domain (full rank) making the kernel trivial which
@@ -401,7 +415,7 @@ href="#invertible-matrix">Invertible Matrix</a>]<br />
 class="math inline">\(Ax=b\)</span> has a solution for all <span
 class="math inline">\(b \in R^m\)</span> if <span
 class="math inline">\(A\)</span> is surjective.<span
-class="sidenote-wrapper"><label for="sn-9" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-9" class="margin-toggle"/><span
+class="sidenote-wrapper"><label for="sn-10" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-10" class="margin-toggle"/><span
 class="sidenote">Because everything in <span
 class="math inline">\(b\)</span> can be mapped to by A from something in
 <span class="math inline">\(x\)</span><br />
@@ -491,7 +505,7 @@ Injective/Surjective/Bijective</h3>
 vectors in the domain to the image of its inverse, i.e. it is [<a
 href="#bijective">Bijective</a>]. This means no non-zero vectors will be
 mapped to zero, only zero will map to zero.<span
-class="sidenote-wrapper"><label for="sn-10" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-10" class="margin-toggle"/><span
+class="sidenote-wrapper"><label for="sn-11" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-11" class="margin-toggle"/><span
 class="sidenote">Conversely, if the matrix is non-invertible, then it
 will collapse some part of its space to a lower dimension by mapping a
 non-zero vector to zero.<br />
