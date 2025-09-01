@@ -10,7 +10,7 @@ from a AI/ML perspective
 ## Vectors
 
 Vectors are a fundamental concept in linear algebra and can have multiple interpretations from physics, to computer science, and mathematics. For our purposes we will use assume they represent a line that begins at the origin, and goes to the point represented by the vector.
-In mathematics, a vector is defined as an element of a [[Vector Space]], and is defined by their operations (see below).
+In mathematics, a vector is defined as an element of a [Vector Space], and is defined by their operations (see below).
 They are represented[^1] like this:
 
 $\begin{bmatrix} 1 \\ 2 \end{bmatrix}$
@@ -21,7 +21,7 @@ The primary vector operations are:
 - multiplication by a scalar - scales the vector
 
 A vector exists outside of its coordinates and is not the same as its coordinates
-Vectors can represent different coordinates in different coordinate spaces through [[Linear Transformation]].
+Vectors can represent different coordinates in different coordinate spaces through [Linear Transformation].
 
 ### Orthogonal Vectors
 
@@ -29,11 +29,11 @@ Vector that is perpendicular to another vector or vector space. It has a [Inner 
 
 ### Orthonormal Vectors
 
-[[Orthogonal Vectors]] with length 1.
+[Orthogonal Vectors] with length 1.
 
 ### Basis Vector
 
-Basis vectors of a [[Vector Space]] are a set of [[Linearly Independent]] vectors that span the entire vector space, so they can express all the vectors in the space.
+Basis vectors of a [Vector Space] are a set of [Linearly Independent] vectors that span the entire vector space, so they can express all the vectors in the space.
 Since a vector space can have infinitely many vectors, using the basis allows us to succinctly define and work with the vector space.
 
 Given S subset of V, S is basis of V if
@@ -58,16 +58,30 @@ Some reasons you may want to change the basis:
 | Easier geometric understanding | Vectors align with physical intuition |
 | Animate or transform objects   | Efficient manipulation of scenes      |
 
-Basis vectors that are [[Orthonormal Vectors]]
+Basis vectors that are [Orthonormal Vectors]
 
-- [[inner product]] is 0 : <b_i, b_j> = 0 for i != j (orthogonal),
-- <b_i, b_i> = 1 ; have length = 1
+- [inner product] is 0 : $<b_i, b_j> = 0$ for $i != j$ (orthogonal),
+- $<b_i, b_i> = 1$ ; have length = 1
 
-Can be found by using [[Gram-Schmidt algorithm]]
+Can be found by using [Gram-Schmidt algorithm]
 
 ### Gram-Schmidt algorithm
 
-An iterative method for constructing an [[Orthonormal Basis]] from a set of [[Linearly Independent]] vectors. It works by orthogonalizing each vector with respect to the previous ones, then normalizing each resulting vector to have unit length.[^gsjupyter]
+An iterative method for constructing an [Orthonormal Basis] from a set of [Linearly Independent] vectors. It works by orthogonalizing each vector with respect to the previous ones, then normalizing each resulting vector to have unit length.[^gsjupyter]
+
+Can be defined with [Projection]:
+
+$$
+e_{k+1} := V_{k+1} - proj_{e_1 ... e_k}(V_{k+1})
+$$
+
+where
+
+$$
+proj_{e_1 ... e_k}(x) =  \sum_{i=1}^{k} \frac{\langle x_i,e_i \rangle}{\langle e_i,e_i \rangle} e_i
+$$
+
+starts with $e_1 = v_1$ then finding each subsequent vector $e_k$ relative to $e_{k-1}$ (the previous vector) by removing the projections of the previous vectors of $e$. The resulting spans are equal.
 
 ### Linear Combination
 
@@ -90,7 +104,7 @@ Norms have three properties:
 2. Homogeneity: ||ax|| = ||a|| ||x|| for any scalar a
 3. Triangle inequality = ||x+y|| <= ||x||+||y||
 
-Used in: Regularization, Optimization (Grad Descent), Loss functions, distance metrics, batch and layer normalization. [[Mean Squared Error]] is a scaled L2 norm between a prediction and the truth.
+Used in: Regularization, Optimization (Grad Descent), Loss functions, distance metrics, batch and layer normalization. [Mean Squared Error] is a scaled L2 norm between a prediction and the truth.
 
 Can be used to define distance by taking the norm of the difference:
 $d(x,y) = ||x - y||$
@@ -101,11 +115,11 @@ The vector space defines a set V of vectors, a field F, vector addition, and sca
 
 For example, ℝ³ is a vector space.
 
-Can be described by the [[Basis Vector]]
+Can be described by the [Basis Vector]
 
 ### Linearly Dependent
 
-A subset of vectors contains the zero vector or one of its vectors can be represented as a [[Linear Combination]] of other vectors.
+A subset of vectors contains the zero vector or one of its vectors can be represented as a [Linear Combination] of other vectors.
 This implies there is a "redundant" vector in the set.
 Another definition would be if the null vector 0 can be obtained through linear combination. [^moml56]
 
@@ -113,7 +127,7 @@ Another definition would be if the null vector 0 can be obtained through linear 
 
 No vectors in a set can be written as linear combinations other vectors in the set.
 Can be found by Gaussian Elimination and checking if there are no non-zero rows, calculating the determinant for a square matrix and checking if it is != 0, or if rank = # of vectors.
-If adding another vector increases the [[Span]] they are linearly independent.
+If adding another vector increases the [Span] they are linearly independent.
 
 Another definition would be it is linearly independent iff when the sum of all vectors multiplied by coeffiencts is zero, all coefficients are zero[^moml56]
 
@@ -123,19 +137,26 @@ The span is all the vectors that can be reached by using a linear combination of
 
 ### Inner Product
 
-- ⟨u,v⟩→R
 - A bilinear mapping that is symmetric and positive definite (always positive when applied to itself).
 - Takes two vectors and returns a scalar. $\langle x,y \rangle = x_1 y_1 + x_2 y_2$
+- Defined for a vector space, not just $\mathbb{R}^n$. Can be used as a sum, integral, complex numbers, etc.
+
+Can be used to find:
+
 - Measures length[^3] and angle[^4] between them. If ⟨u,v⟩=0, then u⊥v, if ||x|| = 1 = ||y|| it is also orthonormal.
-- $\langle x,y \rangle = cos \| x \| \|y\| \alpha$
-- Generalization of [[Dot Product]]
-- Also defines the L2 [[Norm]] : $||x|| = \langle x,x \rangle$
+- length (i.e. L2 [norm], inner product with itself)
+- distance between vectors (inner product of the difference)
+- angle/similarity of two vectors (normalized inner product is the cosine) $\langle x,y \rangle = cos \| x \| \|y\| \alpha$
+- Generalization of [Dot Product]
 - MML pg 73-76
 - Linearity of the first variable: $\langle ax + y, z \rangle = a\langle x,z\rangle + \langle y,z\rangle$
 
 ### Dot Product
 
 $\langle x,y \rangle = \sum_{i=1}^{n}{x_i y_i}$ in n-dimensional Euclidean space
+
+The key difference from an inner product is that a dot product is only defined for Euclidean space $\mathbb{R}^n$, whereas an inner
+product works for other spaces beyond $\mathbb{R}^n$.
 
 ### Cauchy-Schwartz inequality
 
@@ -148,7 +169,7 @@ $P^2=P$
 
 $proj_y (x) = \frac{\langle x,y \rangle}{\langle y,y \rangle} y$
 
-It can be used to reduce the number of dimensions, particularly with an [[Orthogonal Projection]].
+It can be used to reduce the number of dimensions, particularly with an [Orthogonal Projection].
 
 ### Orthogonal Projection
 
@@ -174,25 +195,28 @@ $$
 \end{bmatrix}
 $$
 
-Any matrix can be geometrically viewed as a [[Linear Transformation]]. In fact, you can create a 1:1 correspondence between a set of linear transformations $f$ and a matrix $A$ for a given basis. From this perspective a matrix is simply a representation of linear transformations relative to a given basis.
+Any matrix can be geometrically viewed as a [Linear Transformation]. In fact, you can create a 1:1 correspondence between a set of linear transformations $f$ and a matrix $A$ for a given basis. From this perspective a matrix is simply a representation of linear transformations relative to a given basis.
 
 ### Orthogonal Matrix
 
-- Has columns that are [[Orthonormal]], resulting in A^(-1) = A^T, which makes calculating the inverse efficient
-- Results in a rotation when viewed as a linear transformation, the transformation is done relative to an [[Orthonormal Basis]]
+- Has columns that are [Orthonormal], resulting in A^(-1) = A^T, which makes calculating the inverse efficient
+- Results in a rotation when viewed as a linear transformation, the transformation is done relative to an [Orthonormal Basis]
 
 ### Linear Transformation
 
-By multiplying a vector by a matrix, we can perform transformations of the vector. So geometrically a matrix represents a linear transform of a vector.
+By multiplying a vector by a matrix, we can perform transformations of the vector. Geometrically a matrix represents a linear transform of a vector.
+Linear transformations preserve vector addition and scalar multiplication. Therefore the set of all linear transformations from $V \rightarrow W$ also forms a vector space.
 
-Linear Transformations have the key properties:
+Linear Transformations key properties:
 
 1. Lines remain lines, they don't become curves
-2. Origin stays the same
+2. Origin stays fixed
 3. Grid lines stay equally spaced and parallel
 
-The transformation can be represented by a matrix describes of how the basis vector changes from the domain to the codomain. This creates a 1:1 correspondence between the transformation functions and the matrix which represents it. The values of the matrix are the images of the domain in the codomain. It can be compared to the allegory of caves, where the transformation is the reality and the matrix is the shadow representation of the transformation.
+The columns of the matrix are the coordinates of the images of the basis vectors in the co-domain basis. Once a basis is chosen there is a 1:1 correspondence between the transformation and the representing matrix.
+It can be compared to the allegory of caves, where the transformation is what happens and the matrix is a representation of the transformation.
 
+Two primary objects associated with a linear transformation are its [kernel] and [image].
 **Definition (Matrix of a Linear Transformation)**
 
 Let $V$ and $W$ be finite-dimensional vector spaces over a field $\mathbb{F}$ with ordered bases
@@ -223,10 +247,32 @@ Each **column** of this matrix is the coordinate vector of $T(v_j)$ expressed in
 - [Interactive Tool](https://claude.ai/public/artifacts/ebfef9fb-c08b-48ca-a9ed-9ec68ef6ba6b)
 - [3 Blue 1 Brown video](https://www.youtube.com/watch?v=kYB8IZa5AuE)
 
+### Kernel
+
+Set of all vectors in the domain that map to zero in the co-domain (Null space).
+
+$$
+ker(T) = {v \in V | T(v) =0}
+$$
+
+- Geometrically it is the subspace of vectors that get squashed to the origin.
+- If ker(T) = {0} then the transformation in [injective].
+
+### Image
+
+Set of all vectors in the co-domain that are outputs of T (range):
+
+$$
+im(T) = {T(v) | v \in V}
+$$
+
+- Image is the span of the transformed basis vectors
+- describes what is reachable
+
 ### Determinant
 
-- For a 2-D vector space, it gives the change in the area of a square created by the [[Basis Vector]]s. Change in volume for a cube in 3D.
-- When det = 0, it squishes the area down to a line or point, and indicates the vectors of the matrix are [[Linearly Dependent]].
+- For a 2-D vector space, it gives the change in the area of a square created by the [Basis Vector]s. Change in volume for a cube in 3D.
+- When det = 0, it squishes the area down to a line or point, and indicates the vectors of the matrix are [Linearly Dependent].
 - If det is negative, there is a "flip", but the change in area is equivalent to the absolute value of the determinant.
   [^3b1bdet]
 
@@ -248,11 +294,15 @@ A matrix is injective (one-to-one) if every input maps to a distinct output. Thi
 $f: A \rightarrow B$ is injective if:
 
 $$
+
 f(x_1) = f(x_2) \Rightarrow x_1 = x_2
+
 $$
 
 $$
+
 x_1 \neq x_2 \Rightarrow f(x_1) \neq f(x_2)
+
 $$
 
 ### Surjective
@@ -262,12 +312,14 @@ This means $Ax=b$ has a solution for all $b \in R^m$ if $A$ is surjective.[^surj
 Formally:
 
 $$
+
 \forall y \in B, \exists x \in A \text{ such that } f(x) = y
+
 $$
 
 ### Bijective
 
-A matrix is bijective if it is both [[Injective]] and [[Surjective]]. A bijective mapping has an inverse, so it defines an [[invertable matrix]] and must be square. A bijective matrix preserves the structure during transformation allowing "change of variable" transformations.
+A matrix is bijective if it is both [Injective] and [Surjective]. A bijective mapping has an inverse, so it defines an [invertable matrix] and must be square. A bijective matrix preserves the structure during transformation allowing "change of variable" transformations.
 
 ### Summary of Injective/Surjective/Bijective
 
@@ -287,17 +339,17 @@ A matrix is bijective if it is both [[Injective]] and [[Surjective]]. A bijectiv
 
 ### Invertible Matrix
 
-For a matrix to be invertible, there must be a mapping from each of vectors in the domain to the image of its inverse, i.e. it is [[Bijective]]. This means no non-zero vectors will be mapped to zero, only zero will map to zero.[^noninvertible] Invertible matrices allow stretching, rotating, etc. but preserves the dimensionality. The inverse is defined by: $AA^{-1} = I$
+For a matrix to be invertible, there must be a mapping from each of vectors in the domain to the image of its inverse, i.e. it is [Bijective]. This means no non-zero vectors will be mapped to zero, only zero will map to zero.[^noninvertible] Invertible matrices allow stretching, rotating, etc. but preserves the dimensionality. The inverse is defined by: $AA^{-1} = I$
 
 ### Characteristic Polynomial
 
 For a square matrix:
 $$P_a(\lambda) = det(A - \lambda I)$$
-Used in calculating [[Eigenvector]] by solving for $P_a(\lambda) = 0$.
+Used in calculating [Eigenvector] by solving for $P_a(\lambda) = 0$.
 
 ### Eigenvectors and Eigenvalues
 
-Eigenvectors and values characterize the [[Linear Transformation]] of a square matrix. The mathematical relationship is:
+Eigenvectors and values characterize the [Linear Transformation] of a square matrix. The mathematical relationship is:
 $$Av = \lambda v$$
 where v is the eigenvector and $\lambda$ is the eigenvalue.
 
@@ -317,20 +369,20 @@ Eigenvalues indicate how much the eigenvectors are stretched as a result of the 
 For a matrix A, eigenvector x, and eigenvalue $\lambda$ : $Ax = \lambda x$
 
 - $det(A - \lambda I_n = 0)$
-- If $A \in R^{nxn}$ is symmetric, there is an [[ONB]] of the vector space with the eigenvector of A and a real eigenvalue
-- The [[Determinant]] of a matrix is equal to the product of its eigenvalues: $det(A) = \Pi i=1$ to $n \lambda_i$
+- If $A \in R^{nxn}$ is symmetric, there is an [ONB] of the vector space with the eigenvector of A and a real eigenvalue
+- The [Determinant] of a matrix is equal to the product of its eigenvalues: $det(A) = \Pi i=1$ to $n \lambda_i$
   - Ties in the fact that the determinant calculates the area of the transformation with the eigenvalues.
-- Solving for the [[Eigenvalue]] and [[Eigenvector]]
-  1. Set [[Charateristic Polynomial]] = 0: $$P_A(\lambda) = 0$$ solving for the Eigenvalues
+- Solving for the [Eigenvalue] and [Eigenvector]
+  1. Set [Charateristic Polynomial] = 0: $$P_A(\lambda) = 0$$ solving for the Eigenvalues
   2. Use Eignevalues to then find Eigenvectors by solving: $$(A-\lambda_i I)v_i = 0$$
 
 ### PageRank
 
-Uses the [[Eigenvector]] of the maximal [[Eigenvalue]]s to rank a page based on the incoming links and how important they are.
+Uses the [Eigenvector] of the maximal [Eigenvalue]s to rank a page based on the incoming links and how important they are.
 
 ## Null space
 
-Has dimension equal to the number of zero [[Eigenvalue]]s.
+Has dimension equal to the number of zero [Eigenvalue]s.
 
 ## Matrix Decomposition
 
@@ -366,7 +418,7 @@ Math of Machine Learning (MoML)
 
 [^dotprod]: Dot product if its a real vector
 
-[^3]: Distance between vectors for an inner product space (V, <.,.>) : d(x,y) := |x - y| = sqrt(<x - y>, <x - y>). Relates to [[L2 Norm]].
+[^3]: Distance between vectors for an inner product space (V, <.,.>) : d(x,y) := |x - y| = sqrt(<x - y>, <x - y>). Relates to [L2 Norm].
 
 [^4]: cos w = <x, y> / (||x|| ||y||) by Cauchy-Schwartz Inequality
 
@@ -378,6 +430,10 @@ Math of Machine Learning (MoML)
 
 [^surj]: Because everything in $b$ can be mapped to by A from something in $x$
 
-[^surjinjsquare]: If a matrix is square and surjective, it is also injective because the number of columns of a square matrix is equal to the dimension of the domain (full rank) making the kernel trivial which is the definition of injective. This also makes it [[Bijective]] and therefore an [[Invertible Matrix]]
+[^surjinjsquare]: If a matrix is square and surjective, it is also injective because the number of columns of a square matrix is equal to the dimension of the domain (full rank) making the kernel trivial which is the definition of injective. This also makes it [Bijective] and therefore an [Invertible Matrix]
 
-[^cosinesim]: $cos \langle x,y \rangle = \langle \frac{x}{||x||} , \frac{y}{||y||} \rangle$
+[^cosinesim]:
+    $cos \langle x,y \rangle = \langle \frac{x}{||x||} , \frac{y}{||y||} \rangle$
+
+    $$
+    $$
