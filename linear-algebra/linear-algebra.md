@@ -289,7 +289,7 @@ The diagonal sum of the matrix
 
 ### Injective
 
-A matrix is injective (one-to-one) if every input maps to a distinct output. This does not necessarily mean that all values in the co-domain are covered. In other words, every input gets mapped to one output, with no overlaps. If you know that x -> y, then if something else maps to y it must be equal to x. Injective also means $ker(A) = \{0\}$ the Kernel is equal to the zero vector. A matrix can only be injective if it is square or "tall" (m >= n). More formally:
+A matrix is injective (one-to-one) if every input maps to a distinct output. This does not necessarily mean that all values in the co-domain are covered. In other words, every input gets mapped to one output, with no overlaps. If you know that x -> y, then if something else maps to y it must be equal to x. Injective also means $ker(A) = \{0\}$. A matrix can only be injective if it is square or "tall" (m >= n). More formally:
 
 $f: A \rightarrow B$ is injective if:
 
@@ -428,7 +428,7 @@ Math of Machine Learning (MoML)
 
 [^noninvertible]: Conversely, if the matrix is non-invertible, then it will collapse some part of its space to a lower dimension by mapping a non-zero vector to zero.
 
-[^surj]: Because everything in $b$ can be mapped to by A from something in $x$
+[^surj]: Because everything in $b$ can be mapped to by A from something in $x$, or the image is equal to the co-domain
 
 [^surjinjsquare]: If a matrix is square and surjective, it is also injective because the number of columns of a square matrix is equal to the dimension of the domain (full rank) making the kernel trivial which is the definition of injective. This also makes it [Bijective] and therefore an [Invertible Matrix]
 
