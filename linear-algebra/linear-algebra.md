@@ -271,17 +271,31 @@ $$
 
 ### Determinant
 
-- For a 2-D vector space, it gives the change in the area of a square created by the [Basis Vector]s. Change in volume for a cube in 3D.
+- For a 2-D vector space, it gives the change in the area of a parallelogram created by the [Basis Vector]s. Change in volume for a parallelopiped in 3D.
+- The change in area is equivalent to the absolute value of the determinant.
+- If det is negative, there is a "flip", so it also conveys the orientation.
 - When det = 0, it squishes the area down to a line or point, and indicates the vectors of the matrix are [Linearly Dependent].
-- If det is negative, there is a "flip", but the change in area is equivalent to the absolute value of the determinant.
   [^3b1bdet]
-
-The determinant can only be found for a square matrix.
+- The determinant can only be found for a square matrix.
 
 Calculating the determinant
-For 2D
-For 3D
-For nxn - reduce to 2x2
+For 2D:
+
+$$
+A = \begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+det A = ad - cb
+$$
+
+More generically:
+
+$$
+det A = \sum{j=1}{n}(-1)^{j+1}a_(1,j) det A_{1,j}
+$$
+
+where $A\_{i,j} is (n-1)x(n-1) matrix after removing ith row and jth column.
 
 ### Trace
 
@@ -339,7 +353,9 @@ A matrix is bijective if it is both [Injective] and [Surjective]. A bijective ma
 
 ### Invertible Matrix
 
-For a matrix to be invertible, there must be a mapping from each of vectors in the domain to the image of its inverse, i.e. it is [Bijective]. This means no non-zero vectors will be mapped to zero, only zero will map to zero.[^noninvertible] Invertible matrices allow stretching, rotating, etc. but preserves the dimensionality. The inverse is defined by: $AA^{-1} = I$
+- For a matrix to be invertible, there must be a mapping from each of vectors in the domain to the image of its inverse, i.e. it is [Bijective]. This means no non-zero vectors will be mapped to zero, only zero will map to zero.[^noninvertible] Invertible matrices allow stretching, rotating, etc. but preserves the dimensionality. The inverse is defined by: $AA^{-1} = I$
+
+- Matrix is only invertible if $det A \neq 0$
 
 ### Characteristic Polynomial
 
