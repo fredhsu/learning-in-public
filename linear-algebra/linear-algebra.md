@@ -286,16 +286,19 @@ A = \begin{bmatrix}
 a & b \\
 c & d
 \end{bmatrix}
+$$
+
+$$
 det A = ad - cb
 $$
 
 More generically:
 
 $$
-det A = \sum{j=1}{n}(-1)^{j+1}a_(1,j) det A_{1,j}
+det A = \sum_{j=1}^{n}(-1)^{j+1}a_{1,j} det A_{1,j}
 $$
 
-where $A\_{i,j} is (n-1)x(n-1) matrix after removing ith row and jth column.
+where $A\_{i,j}$ is a $(n-1) \times (n-1)$ matrix after removing ith row and jth column.
 
 ### Trace
 
@@ -308,15 +311,11 @@ A matrix is injective (one-to-one) if every input maps to a distinct output. Thi
 $f: A \rightarrow B$ is injective if:
 
 $$
-
 f(x_1) = f(x_2) \Rightarrow x_1 = x_2
-
 $$
 
 $$
-
 x_1 \neq x_2 \Rightarrow f(x_1) \neq f(x_2)
-
 $$
 
 ### Surjective
@@ -326,9 +325,7 @@ This means $Ax=b$ has a solution for all $b \in R^m$ if $A$ is surjective.[^surj
 Formally:
 
 $$
-
 \forall y \in B, \exists x \in A \text{ such that } f(x) = y
-
 $$
 
 ### Bijective

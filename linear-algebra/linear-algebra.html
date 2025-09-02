@@ -234,7 +234,9 @@ positive when applied to itself).</li>
 <li>Takes two vectors and returns a scalar. <span
 class="math inline">\(\langle x,y \rangle = x_1 y_1 + x_2
 y_2\)</span></li>
-<li>Defined for a vector space</li>
+<li>Defined for a vector space, not just <span
+class="math inline">\(\mathbb{R}^n\)</span>. Can be used as a sum,
+integral, complex numbers, etc.</li>
 </ul>
 <p>Can be used to find:</p>
 <ul>
@@ -265,10 +267,11 @@ y,z\rangle\)</span></li>
 </ul>
 <h3 id="dot-product">Dot Product</h3>
 <p><span class="math inline">\(\langle x,y \rangle = \sum_{i=1}^{n}{x_i
-y_i}\)</span> in n-dimensional Euclidean space The key difference from
-an inner product is that a dot product is only defined for Euclidean
-space <span class="math inline">\(\mathbb{R}^n\)</span>, whereas an
-inner product works for other spaces beyond <span
+y_i}\)</span> in n-dimensional Euclidean space</p>
+<p>The key difference from an inner product is that a dot product is
+only defined for Euclidean space <span
+class="math inline">\(\mathbb{R}^n\)</span>, whereas an inner product
+works for other spaces beyond <span
 class="math inline">\(\mathbb{R}^n\)</span>.</p>
 <h3 id="cauchy-schwartz-inequality">Cauchy-Schwartz inequality</h3>
 <p><span class="math inline">\(|\langle x,y \rangle|^2 \leq \langle x,x
@@ -295,6 +298,9 @@ ratio of projection length to vector length, and that ratio is
 class="sidenote-wrapper"><label for="sn-7" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-7" class="margin-toggle"/><span
 class="sidenote"><span class="math inline">\(cos \langle x,y \rangle =
 \langle \frac{x}{||x||} , \frac{y}{||y||} \rangle\)</span><br />
+<br />
+<span class="math display">\[
+\]</span><br />
 <br />
 </span></span> : how much of a one vector lies in the direction of
 another measured by the angle between the vectors.</li>
@@ -332,22 +338,26 @@ href="#orthonormal-basis">Orthonormal Basis</a></li>
 </ul>
 <h3 id="linear-transformation">Linear Transformation</h3>
 <p>By multiplying a vector by a matrix, we can perform transformations
-of the vector. So geometrically a matrix represents a linear transform
-of a vector.</p>
-<p>Linear Transformations have the key properties:</p>
+of the vector. Geometrically a matrix represents a linear transform of a
+vector. Linear transformations preserve vector addition and scalar
+multiplication. Therefore the set of all linear transformations from
+<span class="math inline">\(V \rightarrow W\)</span> also forms a vector
+space.</p>
+<p>Linear Transformations key properties:</p>
 <ol type="1">
 <li>Lines remain lines, they don’t become curves</li>
-<li>Origin stays the same</li>
+<li>Origin stays fixed</li>
 <li>Grid lines stay equally spaced and parallel</li>
 </ol>
-<p>The transformation can be represented by a matrix describes of how
-the basis vector changes from the domain to the codomain. This creates a
-1:1 correspondence between the transformation functions and the matrix
-which represents it. The values of the matrix are the images of the
-domain in the codomain. It can be compared to the allegory of caves,
-where the transformation is the reality and the matrix is the shadow
-representation of the transformation.</p>
-<p><strong>Definition (Matrix of a Linear Transformation)</strong></p>
+<p>The columns of the matrix are the coordinates of the images of the
+basis vectors in the co-domain basis. Once a basis is chosen there is a
+1:1 correspondence between the transformation and the representing
+matrix. It can be compared to the allegory of caves, where the
+transformation is what happens and the matrix is a representation of the
+transformation.</p>
+<p>Two primary objects associated with a linear transformation are its
+<a href="#kernel">kernel</a> and <a href="#image">image</a>.
+<strong>Definition (Matrix of a Linear Transformation)</strong></p>
 <p>Let <span class="math inline">\(V\)</span> and <span
 class="math inline">\(W\)</span> be finite-dimensional vector spaces
 over a field <span class="math inline">\(\mathbb{F}\)</span> with
@@ -386,23 +396,63 @@ Tool</a></li>
 <li><a href="https://www.youtube.com/watch?v=kYB8IZa5AuE">3 Blue 1 Brown
 video</a></li>
 </ul>
+<h3 id="kernel">Kernel</h3>
+<p>Set of all vectors in the domain that map to zero in the co-domain
+(Null space).</p>
+<p><span class="math display">\[
+ker(T) = {v \in V | T(v) =0}
+\]</span></p>
+<ul>
+<li>Geometrically it is the subspace of vectors that get squashed to the
+origin.</li>
+<li>If ker(T) = {0} then the transformation in <a
+href="#injective">injective</a>.</li>
+</ul>
+<h3 id="image">Image</h3>
+<p>Set of all vectors in the co-domain that are outputs of T
+(range):</p>
+<p><span class="math display">\[
+im(T) = {T(v) | v \in V}
+\]</span></p>
+<ul>
+<li>Image is the span of the transformed basis vectors</li>
+<li>describes what is reachable</li>
+</ul>
 <h3 id="determinant">Determinant</h3>
 <ul>
-<li>For a 2-D vector space, it gives the change in the area of a square
-created by the <a href="#basis-vector">Basis Vector</a>s. Change in
-volume for a cube in 3D.</li>
+<li>For a 2-D vector space, it gives the change in the area of a
+parallelogram created by the <a href="#basis-vector">Basis Vector</a>s.
+Change in volume for a parallelopiped in 3D.</li>
+<li>The change in area is equivalent to the absolute value of the
+determinant.</li>
+<li>If det is negative, there is a “flip”, so it also conveys the
+orientation.</li>
 <li>When det = 0, it squishes the area down to a line or point, and
 indicates the vectors of the matrix are <a
-href="#linearly-dependent">Linearly Dependent</a>.</li>
-<li>If det is negative, there is a “flip”, but the change in area is
-equivalent to the absolute value of the determinant. <span
+href="#linearly-dependent">Linearly Dependent</a>. <span
 class="sidenote-wrapper"><label for="sn-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-8" class="margin-toggle"/><span
 class="sidenote">Great video from 3b1b on this.<br />
 <br />
 </span></span></li>
+<li>The determinant can only be found for a square matrix.</li>
 </ul>
-<p>The determinant can only be found for a square matrix.</p>
-<p>Calculating the determinant For 2D For 3D For nxn - reduce to 2x2</p>
+<p>Calculating the determinant For 2D:</p>
+<p><span class="math display">\[
+A = \begin{bmatrix}
+a &amp; b \\
+c &amp; d
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+det A = ad - cb
+\]</span></p>
+<p>More generically:</p>
+<p><span class="math display">\[
+det A = \sum_{j=1}^{n}(-1)^{j+1}a_{1,j} det A_{1,j}
+\]</span></p>
+<p>where <span class="math inline">\(A\_{i,j}\)</span> is a <span
+class="math inline">\((n-1) \times (n-1)\)</span> matrix after removing
+ith row and jth column.</p>
 <h3 id="trace">Trace</h3>
 <p>The diagonal sum of the matrix</p>
 <h3 id="injective">Injective</h3>
@@ -411,9 +461,8 @@ output. This does not necessarily mean that all values in the co-domain
 are covered. In other words, every input gets mapped to one output, with
 no overlaps. If you know that x -&gt; y, then if something else maps to
 y it must be equal to x. Injective also means <span
-class="math inline">\(ker(A) = \{0\}\)</span> the Kernel is equal to the
-zero vector. A matrix can only be injective if it is square or “tall” (m
-&gt;= n). More formally:</p>
+class="math inline">\(ker(A) = \{0\}\)</span>. A matrix can only be
+injective if it is square or “tall” (m &gt;= n). More formally:</p>
 <p><span class="math inline">\(f: A \rightarrow B\)</span> is injective
 if:</p>
 <p><span class="math display">\[
@@ -442,7 +491,8 @@ class="math inline">\(A\)</span> is surjective.<span
 class="sidenote-wrapper"><label for="sn-10" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-10" class="margin-toggle"/><span
 class="sidenote">Because everything in <span
 class="math inline">\(b\)</span> can be mapped to by A from something in
-<span class="math inline">\(x\)</span><br />
+<span class="math inline">\(x\)</span>, or the image is equal to the
+co-domain<br />
 <br />
 </span></span> Formally:</p>
 <p><span class="math display">\[
@@ -525,8 +575,9 @@ Injective/Surjective/Bijective</h3>
 </tbody>
 </table>
 <h3 id="invertible-matrix">Invertible Matrix</h3>
-<p>For a matrix to be invertible, there must be a mapping from each of
-vectors in the domain to the image of its inverse, i.e. it is <a
+<ul>
+<li><p>For a matrix to be invertible, there must be a mapping from each
+of vectors in the domain to the image of its inverse, i.e. it is <a
 href="#bijective">Bijective</a>. This means no non-zero vectors will be
 mapped to zero, only zero will map to zero.<span
 class="sidenote-wrapper"><label for="sn-11" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-11" class="margin-toggle"/><span
@@ -536,7 +587,10 @@ non-zero vector to zero.<br />
 <br />
 </span></span> Invertible matrices allow stretching, rotating, etc. but
 preserves the dimensionality. The inverse is defined by: <span
-class="math inline">\(AA^{-1} = I\)</span></p>
+class="math inline">\(AA^{-1} = I\)</span></p></li>
+<li><p>Matrix is only invertible if <span class="math inline">\(det A
+\neq 0\)</span></p></li>
+</ul>
 <h3 id="characteristic-polynomial">Characteristic Polynomial</h3>
 <p>For a square matrix: <span class="math display">\[P_a(\lambda) =
 det(A - \lambda I)\]</span> Used in calculating <a
