@@ -22,7 +22,7 @@
     }
   </style>
   <link rel="stylesheet" href="tufte.css" />
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
   type="text/javascript"></script>
@@ -299,9 +299,6 @@ class="sidenote-wrapper"><label for="sn-7" class="margin-toggle sidenote-number"
 class="sidenote"><span class="math inline">\(cos \langle x,y \rangle =
 \langle \frac{x}{||x||} , \frac{y}{||y||} \rangle\)</span><br />
 <br />
-<span class="math display">\[
-\]</span><br />
-<br />
 </span></span> : how much of a one vector lies in the direction of
 another measured by the angle between the vectors.</li>
 </ul>
@@ -397,8 +394,9 @@ Tool</a></li>
 video</a></li>
 </ul>
 <h3 id="kernel">Kernel</h3>
-<p>Set of all vectors in the domain that map to zero in the co-domain
-(Null space).</p>
+<p>Set of all vectors in the domain of a [<a
+href="#linear-transformation">Linear Transformation</a>] that map to
+zero in the co-domain (Null space).</p>
 <p><span class="math display">\[
 ker(T) = {v \in V | T(v) =0}
 \]</span></p>
@@ -409,8 +407,8 @@ origin.</li>
 href="#injective">injective</a>.</li>
 </ul>
 <h3 id="image">Image</h3>
-<p>Set of all vectors in the co-domain that are outputs of T
-(range):</p>
+<p>Set of all vectors in the co-domain that are outputs of a [<a
+href="#linear-transformation">linear transformation</a>] (range):</p>
 <p><span class="math display">\[
 im(T) = {T(v) | v \in V}
 \]</span></p>
@@ -429,7 +427,8 @@ determinant.</li>
 orientation.</li>
 <li>When det = 0, it squishes the area down to a line or point, and
 indicates the vectors of the matrix are <a
-href="#linearly-dependent">Linearly Dependent</a>. <span
+href="#linearly-dependent">Linearly Dependent</a>. This also means there
+are either zero or infinitely many solutions to the matrix. <span
 class="sidenote-wrapper"><label for="sn-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-8" class="margin-toggle"/><span
 class="sidenote">Great video from 3b1b on this.<br />
 <br />
@@ -590,6 +589,7 @@ preserves the dimensionality. The inverse is defined by: <span
 class="math inline">\(AA^{-1} = I\)</span></p></li>
 <li><p>Matrix is only invertible if <span class="math inline">\(det A
 \neq 0\)</span></p></li>
+<li><p>Indicates a solution to the matrix can be found</p></li>
 </ul>
 <h3 id="characteristic-polynomial">Characteristic Polynomial</h3>
 <p>For a square matrix: <span class="math display">\[P_a(\lambda) =
@@ -675,18 +675,86 @@ A_{10} A_{11} A_{12} \\ A_{20} A_{21} A_{22} \end{bmatrix}=\)</span>
 L_{10} L_{11} L_{12} \\ 0 0 0 \end{bmatrix} \begin{bmatrix} L_{00}
 L_{01} L_{02} \\ L_{10} L_{11} L_{12} \\ L_{20} L_{21} L_{22}
 \end{bmatrix}\)</span> Example:</p>
+<h3 id="lu-decomposition">LU Decomposition</h3>
+<ul>
+<li><span class="math inline">\(A = LU\)</span> where <span
+class="math inline">\(U=A^{n-1}\)</span> Upper triangular matrix and
+<span class="math inline">\(L=G_1^{-1}G_2^{-1}..G_{n-1}^{-1}\)</span>
+Lower triangular matrix</li>
+<li>Matrix form of Gaussian Elimination</li>
+</ul>
 <h3 id="eigendecomposition">Eigendecomposition</h3>
 <p>Breaks a matrix down into <span
-class="math inline">\(PDP^(-1)\)</span> but only works on square
+class="math inline">\(PDP^{-1}\)</span> but only works on square
 matrices.</p>
 <h3 id="singular-value-decomposition">Singular Value Decomposition</h3>
-<p>Can decompose any matrix into <span class="math inline">\(U \Sigma
-V^T\)</span></p>
+<p>Any (including non-square) real matrix <span class="math inline">\(A
+\in \mathbb{R}^{m \times n}\)</span> can be decomposed as <span
+class="math inline">\(A = U \Sigma V^T\)</span>, where <span
+class="math inline">\(U\)</span> and <span
+class="math inline">\(V\)</span> are orthogonal matrices containing left
+and right singular vectors, and <span
+class="math inline">\(\Sigma\)</span> is a diagonal matrix of singular
+values. This decomposition enables least-squares solutions,
+dimensionality reduction, and PCA (when applied to centered data).
+Truncating at rank <span class="math inline">\(r\)</span> gives the best
+rank-<span class="math inline">\(r\)</span> approximation (Eckart–Young
+theorem).</p>
+<ul>
+<li>U and V are square, orthogonal, unitary matrices of singular vectors
+that rotate the input</li>
+<li><span class="math inline">\(\Sigma\)</span> is a diagonal matrix of
+singular values that stretches the input.</li>
+<li>The singular values are the square roots of the eigenvalues of <span
+class="math inline">\(A^T A\)</span>.</li>
+<li>Columns of <span class="math inline">\(V\)</span> are eigenvectors
+of <span class="math inline">\(A^T A\)</span>, columns of <span
+class="math inline">\(U\)</span> are eigenvectors of <span
+class="math inline">\(A A^T\)</span>.</li>
+<li>Taking <span class="math inline">\(u_1, \sigma_1\)</span>, and <span
+class="math inline">\(v_1\)</span> gives the highest variance / most
+information</li>
+<li><span class="math inline">\(\Sigma\)</span> weighs the importance of
+the columns of <span class="math inline">\(U\)</span> and <span
+class="math inline">\(V^T\)</span>. Only <span
+class="math inline">\(\min(m,n)\)</span> singular values are nonzero;
+the rest of the diagonal entries are zeros. The “economy SVD” truncates
+<span class="math inline">\(U\)</span> and <span
+class="math inline">\(V\)</span> keeping only the columns that
+correspond to non-zero singular values.</li>
+<li>Given the values of <span class="math inline">\(\Sigma\)</span>,
+keeping the first <span class="math inline">\(r\)</span> singular
+values/vectors yields the best rank-<span
+class="math inline">\(r\)</span> approximation of <span
+class="math inline">\(A\)</span>.<span
+class="sidenote-wrapper"><label for="sn-12" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-12" class="margin-toggle"/><span
+class="sidenote">Great explanation here: <a
+href="https://youtu.be/xy3QyyhiuY4?si=4isr2XlyvT8hLyKG"
+class="uri">https://youtu.be/xy3QyyhiuY4?si=4isr2XlyvT8hLyKG</a><br />
+<br />
+</span></span> <span
+class="sidenote-wrapper"><label for="sn-13" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-13" class="margin-toggle"/><span
+class="sidenote">Eckard-Young Theorem<br />
+<br />
+</span></span> broken down as: <span class="math inline">\(\tilde{U}
+\tilde{\Sigma} \tilde{V^T}\)</span></li>
+</ul>
 </section>
 <section>
 <h2 id="references">References</h2>
-<p>Math for Machine Learning (MML) Math of Machine Learning (MoML)
-3b1b</p>
+<ul>
+<li>Math for Machine Learning (MML)</li>
+<li>Math of Machine Learning (MoML)</li>
+<li>3b1b</li>
+<li>MIT 18.06 :
+<ul>
+<li><a href="https://youtu.be/mBcLRGuAFUk?si=TVOvcCsQmKQedM3W"
+class="uri">https://youtu.be/mBcLRGuAFUk?si=TVOvcCsQmKQedM3W</a></li>
+</ul></li>
+<li>Steve Brunton YouTube for SVD: <a
+href="https://youtube.com/playlist?list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv&amp;si=DhYo5BRqiG0t2LHO"
+class="uri">https://youtube.com/playlist?list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv&amp;si=DhYo5BRqiG0t2LHO</a></li>
+</ul>
 </section>
 </article>
 </body>

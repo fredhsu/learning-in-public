@@ -199,8 +199,8 @@ Any matrix can be geometrically viewed as a [Linear Transformation]. In fact, yo
 
 ### Orthogonal Matrix
 
-- Has columns that are [Orthonormal], resulting in A^(-1) = A^T, which makes calculating the inverse efficient
-- Results in a rotation when viewed as a linear transformation, the transformation is done relative to an [Orthonormal Basis]
+- Has columns that are [Orthonormal], resulting in $A^{-} = A^T$, which makes calculating the inverse efficient
+- Results in a rotation when viewed as a linear transformation, the transformation is done relative to an [Orthonormal Basis] but preserves the norm and angle.
 
 ### Linear Transformation
 
@@ -249,7 +249,7 @@ Each **column** of this matrix is the coordinate vector of $T(v_j)$ expressed in
 
 ### Kernel
 
-Set of all vectors in the domain that map to zero in the co-domain (Null space).
+Set of all vectors in the domain of a [[Linear Transformation]] that map to zero in the co-domain (Null space).
 
 $$
 ker(T) = {v \in V | T(v) =0}
@@ -260,7 +260,7 @@ $$
 
 ### Image
 
-Set of all vectors in the co-domain that are outputs of T (range):
+Set of all vectors in the co-domain that are outputs of a [[linear transformation]] (range):
 
 $$
 im(T) = {T(v) | v \in V}
@@ -274,7 +274,7 @@ $$
 - For a 2-D vector space, it gives the change in the area of a parallelogram created by the [Basis Vector]s. Change in volume for a parallelopiped in 3D.
 - The change in area is equivalent to the absolute value of the determinant.
 - If det is negative, there is a "flip", so it also conveys the orientation.
-- When det = 0, it squishes the area down to a line or point, and indicates the vectors of the matrix are [Linearly Dependent].
+- When det = 0, it squishes the area down to a line or point, and indicates the vectors of the matrix are [Linearly Dependent]. This also means there are either zero or infinitely many solutions to the matrix.
   [^3b1bdet]
 - The determinant can only be found for a square matrix.
 
@@ -353,12 +353,18 @@ A matrix is bijective if it is both [Injective] and [Surjective]. A bijective ma
 - For a matrix to be invertible, there must be a mapping from each of vectors in the domain to the image of its inverse, i.e. it is [Bijective]. This means no non-zero vectors will be mapped to zero, only zero will map to zero.[^noninvertible] Invertible matrices allow stretching, rotating, etc. but preserves the dimensionality. The inverse is defined by: $AA^{-1} = I$
 
 - Matrix is only invertible if $det A \neq 0$
+- Indicates a solution to the matrix can be found
 
 ### Characteristic Polynomial
 
 For a square matrix:
 $$P_a(\lambda) = det(A - \lambda I)$$
 Used in calculating [Eigenvector] by solving for $P_a(\lambda) = 0$.
+
+The fundamental theorem of algebra guarantees it will have n roots for an n-dimensional complex vector space, it does not hold for a real vector space since the eigenvalues may not exist.
+
+To then solve for eigenvector
+$$det(A - \lambda I)x = 0$$ or $$ker(A-\lambda I)$$
 
 ### Eigenvectors and Eigenvalues
 
@@ -409,21 +415,53 @@ $A = LL^T$
 
 $\begin{bmatrix} A_{00} A_{01} A_{02} \\ A_{10} A_{11} A_{12} \\ A_{20} A_{21} A_{22} \end{bmatrix}=$
 $\begin{bmatrix} L_{00} L_{01} L_{02} \\ L_{10} L_{11} L_{12} \\ 0 0 0 \end{bmatrix} \begin{bmatrix} L_{00} L_{01} L_{02} \\ L_{10} L_{11} L_{12} \\ L_{20} L_{21} L_{22} \end{bmatrix}$
-Example:
+
+- Can be more efficient than LU decomposition
+- Calculate by building the matrix of $LL^T$ then iterating through the columns when set equal to A to produce L.
+
+### LU Decomposition
+
+- $A = LU$ where $U=A^{n-1}$ Upper triangular matrix and $L=G_1^{-1}G_2^{-1}..G_{n-1}^{-1}$ Lower triangular matrix
+  $L$: unit lower triangular (1s on the diagonal, multipliers below).
+  $U$: upper triangular.
+- Matrix form of Gaussian Elimination
+
+- Gaussian elimination transforms $A$ into an upper triangular matrix $U$.
+- The multipliers used in the elimination steps form the entries of $L$.
+- Equivalently, elimination can be described with elementary elimination matrices $G_i$:
+  $U = G_{n-1} G_{n-2} \cdots G_1 A$
+  Taking inverses gives
+
+  $A = (G_1^{-1} G_2^{-1} \cdots G_{n-1}^{-1}) U$,
+  where
+  $L = G_1^{-1} G_2^{-1} \cdots G_{n-1}^{-1}$.
 
 ### Eigendecomposition
 
-Breaks a matrix down into $PDP^(-1)$ but only works on square matrices.
+- Breaks a matrix down into $PDP^{-1}$ but only works on square matrices with linearly independent [[eigenvectors]].
+- $P$: columns are eigenvectors of $A$
+- $D$: diagonal entries are the corresponding [[eigenvalues]]
 
 ### Singular Value Decomposition
 
-Can decompose any matrix into $U \Sigma V^T$
+Any (including non-square) real matrix $A \in \mathbb{R}^{m \times n}$ can be decomposed as $A = U \Sigma V^T$, where $U$ and $V$ are orthogonal matrices containing left and right singular vectors, and $\Sigma$ is a diagonal matrix of singular values. This decomposition enables least-squares solutions, dimensionality reduction, and PCA (when applied to centered data). Truncating at rank $r$ gives the best rank-$r$ approximation (Eckart–Young theorem).
+
+- U and V are square, orthogonal, unitary matrices of singular vectors that rotate the input
+- $\Sigma$ is a diagonal matrix of singular values that stretches the input.
+- The singular values are the square roots of the eigenvalues of $A^T A$.
+- Columns of $V$ are eigenvectors of $A^T A$, columns of $U$ are eigenvectors of $A A^T$.
+- Taking $u_1, \sigma_1$, and $v_1$ gives the highest variance / most information
+- $\Sigma$ weighs the importance of the columns of $U$ and $V^T$. Only $\min(m,n)$ singular values are nonzero; the rest of the diagonal entries are zeros. The "economy SVD" truncates $U$ and $V$ keeping only the columns that correspond to non-zero singular values.
+- Given the values of $\Sigma$, keeping the first $r$ singular values/vectors yields the best rank-$r$ approximation of $A$.[^svdmatrixapprox] [^eckardyoung] broken down as: $\tilde{U} \tilde{\Sigma} \tilde{V^T}$
 
 ## References
 
-Math for Machine Learning (MML)
-Math of Machine Learning (MoML)
-3b1b
+- Math for Machine Learning (MML)
+- Math of Machine Learning (MoML)
+- 3b1b
+- MIT 18.06 :
+  - <https://youtu.be/mBcLRGuAFUk?si=TVOvcCsQmKQedM3W>
+- Steve Brunton YouTube for SVD: <https://youtube.com/playlist?list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv&si=DhYo5BRqiG0t2LHO>
 
 [^1]: I am using Pandoc and LaTeX to render some of this math. In this case pmatrix, bmatrix Bmatrix give parenthesis, brackets, braces matrix styles are useful latex options.
 
@@ -445,8 +483,8 @@ Math of Machine Learning (MoML)
 
 [^surjinjsquare]: If a matrix is square and surjective, it is also injective because the number of columns of a square matrix is equal to the dimension of the domain (full rank) making the kernel trivial which is the definition of injective. This also makes it [Bijective] and therefore an [Invertible Matrix]
 
-[^cosinesim]:
-    $cos \langle x,y \rangle = \langle \frac{x}{||x||} , \frac{y}{||y||} \rangle$
+[^svdmatrixapprox]: Great explanation here: <https://youtu.be/xy3QyyhiuY4?si=4isr2XlyvT8hLyKG>
 
-    $$
-    $$
+[^cosinesim]: $cos \langle x,y \rangle = \langle \frac{x}{||x||} , \frac{y}{||y||} \rangle$
+
+[^eckardyoung]: Eckard-Young Theorem
