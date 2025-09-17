@@ -167,6 +167,8 @@ $|\langle x,y \rangle|^2 \leq \langle x,x \rangle \langle y,y \rangle$
 A linear map that maps a vector space to another subspace. It is the same if you apply it once or twice:
 $P^2=P$
 
+This makes sense, once you've projected, projecting again doesn't have any effect.
+
 $proj_y (x) = \frac{\langle x,y \rangle}{\langle y,y \rangle} y$
 
 It can be used to reduce the number of dimensions, particularly with an [Orthogonal Projection].
@@ -175,7 +177,11 @@ It can be used to reduce the number of dimensions, particularly with an [Orthogo
 
 - Provides the shortest distance between a vector and a subspace by providing a point that is perpendicular to the subspace.
 - If you think of an orthogonal projection forming a right triangle between the vectors, you can apply the law of cosines to find the angle between the two vectors.
+- Can be used as a lossy compression of a transformation
 - By combining orthogonal projection (to get the adjacent side) with the law of cosines (to relate lengths and angles), you can compute the ratio of projection length to vector length, and that ratio is _cosine similarity_[^cosinesim] : how much of a one vector lies in the direction of another measured by the angle between the vectors.
+- Orthogonal Projections are [[Self-Adjoint]]
+- If a projection is orthogonal then $x_im \perp x_ker$, $V = im(P) + im(P)^\perp$
+- Uniqueness of orthogonal projections: if the image spaces of two orthogonal projections are equal, then the projections are equal.
 
 ## Matrices
 
