@@ -1,0 +1,20 @@
+.PHONY: default clean
+
+
+SRC := calculus/calculus.md
+OUT := calculus.html
+CSS := tufte.css
+LUA := section-filter.lua
+
+default: $(OUT)
+
+$(OUT): $(SRC) $(CSS) $(LUA)
+	pandoc -f markdown --filter pandoc-sidenote $(SRC) \
+	    -o $(OUT) \
+	    --css $(CSS) \
+	    --lua-filter=$(LUA) \
+	    --mathjax \
+	    --standalone
+
+clean:
+	rm -f $(OUT)

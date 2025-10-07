@@ -179,9 +179,11 @@ It can be used to reduce the number of dimensions, particularly with an [Orthogo
 - If you think of an orthogonal projection forming a right triangle between the vectors, you can apply the law of cosines to find the angle between the two vectors.
 - Can be used as a lossy compression of a transformation
 - By combining orthogonal projection (to get the adjacent side) with the law of cosines (to relate lengths and angles), you can compute the ratio of projection length to vector length, and that ratio is _cosine similarity_[^cosinesim] : how much of a one vector lies in the direction of another measured by the angle between the vectors.
+- Holds if for every $x \in ker P, y \in im P, \langle x,y \rangle = 0$
+- Can serve as lossy compression of a transformation
 - Orthogonal Projections are [[Self-Adjoint]]
 - If a projection is orthogonal then $x_im \perp x_ker$, $V = im(P) + im(P)^\perp$
-- Uniqueness of orthogonal projections: if the image spaces of two orthogonal projections are equal, then the projections are equal.
+- Uniqueness of orthogonal projections: if the image spaces of two orthogonal projections are equal, then the projections are equal. This means for a given subspace there is only one orthogonal projection, and it is the optimal approximation.
 
 ## Matrices
 
@@ -459,6 +461,22 @@ Any (including non-square) real matrix $A \in \mathbb{R}^{m \times n}$ can be de
 - Taking $u_1, \sigma_1$, and $v_1$ gives the highest variance / most information
 - $\Sigma$ weighs the importance of the columns of $U$ and $V^T$. Only $\min(m,n)$ singular values are nonzero; the rest of the diagonal entries are zeros. The "economy SVD" truncates $U$ and $V$ keeping only the columns that correspond to non-zero singular values.
 - Given the values of $\Sigma$, keeping the first $r$ singular values/vectors yields the best rank-$r$ approximation of $A$.[^svdmatrixapprox] [^eckardyoung] broken down as: $\tilde{U} \tilde{\Sigma} \tilde{V^T}$
+
+### Adjoint
+
+Adjoint transformation $f*$:
+$$\langle f(x), y \rangle = \langle x, f*(y) \rangle$$
+if A is in standard ONB then $f*=A^T$:
+$$\langle Ax, y \rangle = \langle x, A^T y \rangle$$
+
+Adjoints let you swap the order of applying a linear transformation and applying a functional/inner product — while keeping the scalar result unchanged.
+
+So you can think of adjoints as a bookkeeping device that lets you rearrange the order:
+
+Either apply A to the vector and then pair with w or apply A∗ to the functional/test vector w and then pair with v.
+Both paths give the same result.
+
+Optimization/Backprop: lets you “move” derivatives around (gradients transform with A\* instead of A).
 
 ## References
 

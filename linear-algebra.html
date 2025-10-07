@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>linear-algebra</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="tufte.css" />
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<article>
+<h1 id="linear-algebra-notes">Linear Algebra notes</h1>
+<section>
+<h2 id="summary">Summary</h2>
+<p>Linear algebra provides tools for solving and manipulating vectors
+and matrices. Beginning with vectors that define a length and direction,
+represented by a list of numbers, and more abstractly follow rules for
+vector addition and multiplying by a scalar. Vectors can be combined
+using linear combinations, essentially adding and scaling vectors to
+create a new vector. and can be used to represent a linear equation.
+From a networking perspective from a AI/ML perspective</p>
+</section>
+<section>
+<h2 id="vectors">Vectors</h2>
+<p>Vectors are a fundamental concept in linear algebra and can have
+multiple interpretations from physics, to computer science, and
+mathematics. For our purposes we will use assume they represent a line
+that begins at the origin, and goes to the point represented by the
+vector. In mathematics, a vector is defined as an element of a <a
+href="#vector-space">Vector Space</a>, and is defined by their
+operations (see below). They are represented<span
+class="sidenote-wrapper"><label for="sn-0" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-0" class="margin-toggle"/><span
+class="sidenote">I am using Pandoc and LaTeX to render some of this
+math. In this case pmatrix, bmatrix Bmatrix give parenthesis, brackets,
+braces matrix styles are useful latex options.<br />
+<br />
+</span></span> like this:</p>
+<p><span class="math inline">\(\begin{bmatrix} 1 \\ 2
+\end{bmatrix}\)</span></p>
+<p>The primary vector operations are:</p>
+<ul>
+<li>vector addition - combining vectors end to end</li>
+<li>multiplication by a scalar - scales the vector</li>
+</ul>
+<p>A vector exists outside of its coordinates and is not the same as its
+coordinates Vectors can represent different coordinates in different
+coordinate spaces through <a href="#linear-transformation">Linear
+Transformation</a>.</p>
+<h3 id="orthogonal-vectors">Orthogonal Vectors</h3>
+<p>Vector that is perpendicular to another vector or vector space. It
+has a <a href="#inner-product">Inner Product</a><span
+class="sidenote-wrapper"><label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span
+class="sidenote">Dot product if its a real vector<br />
+<br />
+</span></span> of zero with the other vector, or with all the vectors of
+the other vector space.</p>
+<h3 id="orthonormal-vectors">Orthonormal Vectors</h3>
+<p><a href="#orthogonal-vectors">Orthogonal Vectors</a> with length
+1.</p>
+<h3 id="basis-vector">Basis Vector</h3>
+<p>Basis vectors of a <a href="#vector-space">Vector Space</a> are a set
+of <a href="#linearly-independent">Linearly Independent</a> vectors that
+span the entire vector space, so they can express all the vectors in the
+space. Since a vector space can have infinitely many vectors, using the
+basis allows us to succinctly define and work with the vector space.</p>
+<p>Given S subset of V, S is basis of V if</p>
+<ul>
+<li>S is LI</li>
+<li>Span(S) = V</li>
+<li>The elements of S are basis vectors</li>
+<li>MoML pg 57</li>
+</ul>
+<h3 id="orthonormal-basis">Orthonormal Basis</h3>
+<p>The standard basis would have a vector with 1 in each dimension. For
+example <span class="math inline">\([1,0] [0,1]\)</span>. Changing the
+basis does not actually change the vectors, but changes how they are
+described.</p>
+<p>Some reasons you may want to change the basis:</p>
+<table>
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Goal</th>
+<th>What You Gain</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Simplify matrix computations</td>
+<td>Diagonal or block-diagonal matrices</td>
+</tr>
+<tr class="even">
+<td>Align with symmetry</td>
+<td>Cleaner equations, better insight</td>
+</tr>
+<tr class="odd">
+<td>Reduce dimensions (PCA)</td>
+<td>Compress data, denoise</td>
+</tr>
+<tr class="even">
+<td>Improve numerical stability</td>
+<td>Fewer round-off errors</td>
+</tr>
+<tr class="odd">
+<td>Easier geometric understanding</td>
+<td>Vectors align with physical intuition</td>
+</tr>
+<tr class="even">
+<td>Animate or transform objects</td>
+<td>Efficient manipulation of scenes</td>
+</tr>
+</tbody>
+</table>
+<p>Basis vectors that are <a href="#orthonormal-vectors">Orthonormal
+Vectors</a></p>
+<ul>
+<li><a href="#inner-product">inner product</a> is 0 : <span
+class="math inline">\(&lt;b_i, b_j&gt; = 0\)</span> for <span
+class="math inline">\(i != j\)</span> (orthogonal),</li>
+<li><span class="math inline">\(&lt;b_i, b_i&gt; = 1\)</span> ; have
+length = 1</li>
+</ul>
+<p>Can be found by using <a href="#gram-schmidt-algorithm">Gram-Schmidt
+algorithm</a></p>
+<h3 id="gram-schmidt-algorithm">Gram-Schmidt algorithm</h3>
+<p>An iterative method for constructing an <a
+href="#orthonormal-basis">Orthonormal Basis</a> from a set of <a
+href="#linearly-independent">Linearly Independent</a> vectors. It works
+by orthogonalizing each vector with respect to the previous ones, then
+normalizing each resulting vector to have unit length.<span
+class="sidenote-wrapper"><label for="sn-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span
+class="sidenote">See Jupyter notebook for an implementation<br />
+<br />
+</span></span></p>
+<p>Can be defined with <a href="#projection">Projection</a>:</p>
+<p><span class="math display">\[
+e_{k+1} := V_{k+1} - proj_{e_1 ... e_k}(V_{k+1})
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+proj_{e_1 ... e_k}(x) =  \sum_{i=1}^{k} \frac{\langle x_i,e_i
+\rangle}{\langle e_i,e_i \rangle} e_i
+\]</span></p>
+<p>starts with <span class="math inline">\(e_1 = v_1\)</span> then
+finding each subsequent vector <span class="math inline">\(e_k\)</span>
+relative to <span class="math inline">\(e_{k-1}\)</span> (the previous
+vector) by removing the projections of the previous vectors of <span
+class="math inline">\(e\)</span>. The resulting spans are equal.</p>
+<h3 id="linear-combination">Linear Combination</h3>
+<p>A combination of scaling (multiplying) or adding vectors</p>
+<h3 id="norm">Norm</h3>
+<p>The magnitude of a vector from the origin. General form of a norm:
+<span class="math inline">\(||x||_p =
+(\sum_{i=1}^{n}{|x_i|^p})^{1/p}\)</span> Common norms are:</p>
+<ul>
+<li>L1 (Manhattan): sum of absolute values</li>
+<li>L2 (Euclidean): square root of a sum of squares.</li>
+<li>Supremum: <span class="math inline">\(||x||_/infinity :=
+max{|x_1|,...,|x_n|}\)</span></li>
+</ul>
+<p>Norms have three properties:</p>
+<ol type="1">
+<li>Non-negative</li>
+<li>Homogeneity: ||ax|| = ||a|| ||x|| for any scalar a</li>
+<li>Triangle inequality = ||x+y|| &lt;= ||x||+||y||</li>
+</ol>
+<p>Used in: Regularization, Optimization (Grad Descent), Loss functions,
+distance metrics, batch and layer normalization. [Mean Squared Error] is
+a scaled L2 norm between a prediction and the truth.</p>
+<p>Can be used to define distance by taking the norm of the difference:
+<span class="math inline">\(d(x,y) = ||x - y||\)</span></p>
+<h3 id="vector-space">Vector Space</h3>
+<p>The vector space defines a set V of vectors, a field F, vector
+addition, and scalar multiplication that follow a vector space axioms
+such as closure, associativity, identity elements, inverses, and
+distributive properties.</p>
+<p>For example, ℝ³ is a vector space.</p>
+<p>Can be described by the <a href="#basis-vector">Basis Vector</a></p>
+<h3 id="linearly-dependent">Linearly Dependent</h3>
+<p>A subset of vectors contains the zero vector or one of its vectors
+can be represented as a <a href="#linear-combination">Linear
+Combination</a> of other vectors. This implies there is a “redundant”
+vector in the set. Another definition would be if the null vector 0 can
+be obtained through linear combination. <span
+class="sidenote-wrapper"><label for="sn-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-3" class="margin-toggle"/><span
+class="sidenote">Theorem 2 from MoML<br />
+<br />
+</span></span></p>
+<h3 id="linearly-independent">Linearly Independent</h3>
+<p>No vectors in a set can be written as linear combinations other
+vectors in the set. Can be found by Gaussian Elimination and checking if
+there are no non-zero rows, calculating the determinant for a square
+matrix and checking if it is != 0, or if rank = # of vectors. If adding
+another vector increases the <a href="#span">Span</a> they are linearly
+independent.</p>
+<p>Another definition would be it is linearly independent iff when the
+sum of all vectors multiplied by coeffiencts is zero, all coefficients
+are zero<span
+class="sidenote-wrapper"><label for="sn-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-4" class="margin-toggle"/><span
+class="sidenote">Theorem 2 from MoML<br />
+<br />
+</span></span></p>
+<h3 id="span">Span</h3>
+<p>The span is all the vectors that can be reached by using a linear
+combination of a given set of vectors. Adding linearly dependent vectors
+does not increase the span.</p>
+<h3 id="inner-product">Inner Product</h3>
+<ul>
+<li>A bilinear mapping that is symmetric and positive definite (always
+positive when applied to itself).</li>
+<li>Takes two vectors and returns a scalar. <span
+class="math inline">\(\langle x,y \rangle = x_1 y_1 + x_2
+y_2\)</span></li>
+<li>Defined for a vector space, not just <span
+class="math inline">\(\mathbb{R}^n\)</span>. Can be used as a sum,
+integral, complex numbers, etc.</li>
+</ul>
+<p>Can be used to find:</p>
+<ul>
+<li>Measures length<span
+class="sidenote-wrapper"><label for="sn-5" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-5" class="margin-toggle"/><span
+class="sidenote">Distance between vectors for an inner product space (V,
+&lt;.,.&gt;) : d(x,y) := |x - y| = sqrt(&lt;x - y&gt;, &lt;x - y&gt;).
+Relates to [L2 Norm].<br />
+<br />
+</span></span> and angle<span
+class="sidenote-wrapper"><label for="sn-6" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-6" class="margin-toggle"/><span
+class="sidenote">cos w = &lt;x, y&gt; / (||x|| ||y||) by Cauchy-Schwartz
+Inequality<br />
+<br />
+</span></span> between them. If ⟨u,v⟩=0, then u⊥v, if ||x|| = 1 = ||y||
+it is also orthonormal.</li>
+<li>length (i.e. L2 <a href="#norm">norm</a>, inner product with
+itself)</li>
+<li>distance between vectors (inner product of the difference)</li>
+<li>angle/similarity of two vectors (normalized inner product is the
+cosine) <span class="math inline">\(\langle x,y \rangle = cos \| x \|
+\|y\| \alpha\)</span></li>
+<li>Generalization of <a href="#dot-product">Dot Product</a></li>
+<li>MML pg 73-76</li>
+<li>Linearity of the first variable: <span class="math inline">\(\langle
+ax + y, z \rangle = a\langle x,z\rangle + \langle
+y,z\rangle\)</span></li>
+</ul>
+<h3 id="dot-product">Dot Product</h3>
+<p><span class="math inline">\(\langle x,y \rangle = \sum_{i=1}^{n}{x_i
+y_i}\)</span> in n-dimensional Euclidean space</p>
+<p>The key difference from an inner product is that a dot product is
+only defined for Euclidean space <span
+class="math inline">\(\mathbb{R}^n\)</span>, whereas an inner product
+works for other spaces beyond <span
+class="math inline">\(\mathbb{R}^n\)</span>.</p>
+<h3 id="cauchy-schwartz-inequality">Cauchy-Schwartz inequality</h3>
+<p><span class="math inline">\(|\langle x,y \rangle|^2 \leq \langle x,x
+\rangle \langle y,y \rangle\)</span></p>
+<h3 id="projection">Projection</h3>
+<p>A linear map that maps a vector space to another subspace. It is the
+same if you apply it once or twice: <span
+class="math inline">\(P^2=P\)</span></p>
+<p>This makes sense, once you’ve projected, projecting again doesn’t
+have any effect.</p>
+<p><span class="math inline">\(proj_y (x) = \frac{\langle x,y
+\rangle}{\langle y,y \rangle} y\)</span></p>
+<p>It can be used to reduce the number of dimensions, particularly with
+an <a href="#orthogonal-projection">Orthogonal Projection</a>.</p>
+<h3 id="orthogonal-projection">Orthogonal Projection</h3>
+<ul>
+<li>Provides the shortest distance between a vector and a subspace by
+providing a point that is perpendicular to the subspace.</li>
+<li>If you think of an orthogonal projection forming a right triangle
+between the vectors, you can apply the law of cosines to find the angle
+between the two vectors.</li>
+<li>Can be used as a lossy compression of a transformation</li>
+<li>By combining orthogonal projection (to get the adjacent side) with
+the law of cosines (to relate lengths and angles), you can compute the
+ratio of projection length to vector length, and that ratio is
+<em>cosine similarity</em><span
+class="sidenote-wrapper"><label for="sn-7" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-7" class="margin-toggle"/><span
+class="sidenote"><span class="math inline">\(cos \langle x,y \rangle =
+\langle \frac{x}{||x||} , \frac{y}{||y||} \rangle\)</span><br />
+<br />
+</span></span> : how much of a one vector lies in the direction of
+another measured by the angle between the vectors.</li>
+<li>Holds if for every <span class="math inline">\(x \in ker P, y \in im
+P, \langle x,y \rangle = 0\)</span></li>
+<li>Can serve as lossy compression of a transformation</li>
+<li>Orthogonal Projections are [[Self-Adjoint]]</li>
+<li>If a projection is orthogonal then <span class="math inline">\(x_im
+\perp x_ker\)</span>, <span class="math inline">\(V = im(P) +
+im(P)^\perp\)</span></li>
+<li>Uniqueness of orthogonal projections: if the image spaces of two
+orthogonal projections are equal, then the projections are equal. This
+means for a given subspace there is only one orthogonal projection, and
+it is the optimal approximation.</li>
+</ul>
+</section>
+<section>
+<h2 id="matrices">Matrices</h2>
+<p>A matrix can be used to represent a series of linear equations. For
+example given the following linear equations:</p>
+<p><span class="math display">\[
+x + 2y = 5
+3x + 4y = 11
+\]</span></p>
+<p>This becomes:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 2 &amp; 5 \\
+3 &amp; 4 &amp; 11 \\
+\end{bmatrix}
+\]</span></p>
+<p>Any matrix can be geometrically viewed as a <a
+href="#linear-transformation">Linear Transformation</a>. In fact, you
+can create a 1:1 correspondence between a set of linear transformations
+<span class="math inline">\(f\)</span> and a matrix <span
+class="math inline">\(A\)</span> for a given basis. From this
+perspective a matrix is simply a representation of linear
+transformations relative to a given basis.</p>
+<h3 id="orthogonal-matrix">Orthogonal Matrix</h3>
+<ul>
+<li>Has columns that are [Orthonormal], resulting in <span
+class="math inline">\(A^{-} = A^T\)</span>, which makes calculating the
+inverse efficient</li>
+<li>Results in a rotation when viewed as a linear transformation, the
+transformation is done relative to an <a
+href="#orthonormal-basis">Orthonormal Basis</a> but preserves the norm
+and angle.</li>
+</ul>
+<h3 id="linear-transformation">Linear Transformation</h3>
+<p>By multiplying a vector by a matrix, we can perform transformations
+of the vector. Geometrically a matrix represents a linear transform of a
+vector. Linear transformations preserve vector addition and scalar
+multiplication. Therefore the set of all linear transformations from
+<span class="math inline">\(V \rightarrow W\)</span> also forms a vector
+space.</p>
+<p>Linear Transformations key properties:</p>
+<ol type="1">
+<li>Lines remain lines, they don’t become curves</li>
+<li>Origin stays fixed</li>
+<li>Grid lines stay equally spaced and parallel</li>
+</ol>
+<p>The columns of the matrix are the coordinates of the images of the
+basis vectors in the co-domain basis. Once a basis is chosen there is a
+1:1 correspondence between the transformation and the representing
+matrix. It can be compared to the allegory of caves, where the
+transformation is what happens and the matrix is a representation of the
+transformation.</p>
+<p>Two primary objects associated with a linear transformation are its
+<a href="#kernel">kernel</a> and <a href="#image">image</a>.
+<strong>Definition (Matrix of a Linear Transformation)</strong></p>
+<p>Let <span class="math inline">\(V\)</span> and <span
+class="math inline">\(W\)</span> be finite-dimensional vector spaces
+over a field <span class="math inline">\(\mathbb{F}\)</span> with
+ordered bases <span class="math inline">\(\mathcal{B} = \{v_1, v_2,
+\ldots, v_n\}\)</span>for <span class="math inline">\(V\)</span> and
+<span class="math inline">\(\mathcal{C} = \{w_1, w_2, \ldots,
+w_m\}\)</span>for <span class="math inline">\(W\)</span> .</p>
+<p>Let <span class="math inline">\(T: V \to W\)</span> be a linear
+transformation. For each basis vector <span class="math inline">\(v*j
+\in \mathcal{B}\)</span>, there exist unique scalars <span
+class="math inline">\(a*{1j}, a*{2j}, \ldots, a*{mj} \in
+\mathbb{F}\)</span> such that</p>
+<p><span class="math display">\[
+T(v_j) = \sum_{i=1}^{m} a_{ij} w_i.
+\]</span></p>
+<p>The matrix of <span class="math inline">\(T\)</span> with respect to
+the bases <span class="math inline">\(\mathcal{B}\)</span> and <span
+class="math inline">\(\mathcal{C}\)</span> is the <span
+class="math inline">\(m \times n\)</span> matrix</p>
+<p><span class="math display">\[
+[T]_{\mathcal{C} \leftarrow \mathcal{B}} =
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\\\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\\\
+a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}
+\end{bmatrix}.
+\]</span></p>
+<p>Each <strong>column</strong> of this matrix is the coordinate vector
+of <span class="math inline">\(T(v_j)\)</span> expressed in the basis
+<span class="math inline">\(\mathcal{C}\)</span>.</p>
+<ul>
+<li><a
+href="https://claude.ai/public/artifacts/ebfef9fb-c08b-48ca-a9ed-9ec68ef6ba6b">Interactive
+Tool</a></li>
+<li><a href="https://www.youtube.com/watch?v=kYB8IZa5AuE">3 Blue 1 Brown
+video</a></li>
+</ul>
+<h3 id="kernel">Kernel</h3>
+<p>Set of all vectors in the domain of a [<a
+href="#linear-transformation">Linear Transformation</a>] that map to
+zero in the co-domain (Null space).</p>
+<p><span class="math display">\[
+ker(T) = {v \in V | T(v) =0}
+\]</span></p>
+<ul>
+<li>Geometrically it is the subspace of vectors that get squashed to the
+origin.</li>
+<li>If ker(T) = {0} then the transformation in <a
+href="#injective">injective</a>.</li>
+</ul>
+<h3 id="image">Image</h3>
+<p>Set of all vectors in the co-domain that are outputs of a [<a
+href="#linear-transformation">linear transformation</a>] (range):</p>
+<p><span class="math display">\[
+im(T) = {T(v) | v \in V}
+\]</span></p>
+<ul>
+<li>Image is the span of the transformed basis vectors</li>
+<li>describes what is reachable</li>
+</ul>
+<h3 id="determinant">Determinant</h3>
+<ul>
+<li>For a 2-D vector space, it gives the change in the area of a
+parallelogram created by the <a href="#basis-vector">Basis Vector</a>s.
+Change in volume for a parallelopiped in 3D.</li>
+<li>The change in area is equivalent to the absolute value of the
+determinant.</li>
+<li>If det is negative, there is a “flip”, so it also conveys the
+orientation.</li>
+<li>When det = 0, it squishes the area down to a line or point, and
+indicates the vectors of the matrix are <a
+href="#linearly-dependent">Linearly Dependent</a>. This also means there
+are either zero or infinitely many solutions to the matrix. <span
+class="sidenote-wrapper"><label for="sn-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-8" class="margin-toggle"/><span
+class="sidenote">Great video from 3b1b on this.<br />
+<br />
+</span></span></li>
+<li>The determinant can only be found for a square matrix.</li>
+</ul>
+<p>Calculating the determinant For 2D:</p>
+<p><span class="math display">\[
+A = \begin{bmatrix}
+a &amp; b \\
+c &amp; d
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+det A = ad - cb
+\]</span></p>
+<p>More generically:</p>
+<p><span class="math display">\[
+det A = \sum_{j=1}^{n}(-1)^{j+1}a_{1,j} det A_{1,j}
+\]</span></p>
+<p>where <span class="math inline">\(A\_{i,j}\)</span> is a <span
+class="math inline">\((n-1) \times (n-1)\)</span> matrix after removing
+ith row and jth column.</p>
+<h3 id="trace">Trace</h3>
+<p>The diagonal sum of the matrix</p>
+<h3 id="injective">Injective</h3>
+<p>A matrix is injective (one-to-one) if every input maps to a distinct
+output. This does not necessarily mean that all values in the co-domain
+are covered. In other words, every input gets mapped to one output, with
+no overlaps. If you know that x -&gt; y, then if something else maps to
+y it must be equal to x. Injective also means <span
+class="math inline">\(ker(A) = \{0\}\)</span>. A matrix can only be
+injective if it is square or “tall” (m &gt;= n). More formally:</p>
+<p><span class="math inline">\(f: A \rightarrow B\)</span> is injective
+if:</p>
+<p><span class="math display">\[
+f(x_1) = f(x_2) \Rightarrow x_1 = x_2
+\]</span></p>
+<p><span class="math display">\[
+x_1 \neq x_2 \Rightarrow f(x_1) \neq f(x_2)
+\]</span></p>
+<h3 id="surjective">Surjective</h3>
+<p>A matrix is surjective (onto) if every vector in the co-domain has a
+mapping from the domain. This could mean multiple inputs map to the same
+output, but every output must have a mapping from the input space. A
+matrix can only be surjective if it is square<span
+class="sidenote-wrapper"><label for="sn-9" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-9" class="margin-toggle"/><span
+class="sidenote">If a matrix is square and surjective, it is also
+injective because the number of columns of a square matrix is equal to
+the dimension of the domain (full rank) making the kernel trivial which
+is the definition of injective. This also makes it <a
+href="#bijective">Bijective</a> and therefore an <a
+href="#invertible-matrix">Invertible Matrix</a><br />
+<br />
+</span></span> or “wide” (n &lt;= m). This means <span
+class="math inline">\(Ax=b\)</span> has a solution for all <span
+class="math inline">\(b \in R^m\)</span> if <span
+class="math inline">\(A\)</span> is surjective.<span
+class="sidenote-wrapper"><label for="sn-10" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-10" class="margin-toggle"/><span
+class="sidenote">Because everything in <span
+class="math inline">\(b\)</span> can be mapped to by A from something in
+<span class="math inline">\(x\)</span>, or the image is equal to the
+co-domain<br />
+<br />
+</span></span> Formally:</p>
+<p><span class="math display">\[
+\forall y \in B, \exists x \in A \text{ such that } f(x) = y
+\]</span></p>
+<h3 id="bijective">Bijective</h3>
+<p>A matrix is bijective if it is both <a
+href="#injective">Injective</a> and <a
+href="#surjective">Surjective</a>. A bijective mapping has an inverse,
+so it defines an [invertable matrix] and must be square. A bijective
+matrix preserves the structure during transformation allowing “change of
+variable” transformations.</p>
+<h3 id="summary-of-injectivesurjectivebijective">Summary of
+Injective/Surjective/Bijective</h3>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 30%" />
+<col style="width: 24%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Shape</th>
+<th>Transformation</th>
+<th>Injective?</th>
+<th>Surjective?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>2D → 2D</strong></td>
+<td>Shear/rotate</td>
+<td>✅ if no collapse</td>
+<td>✅ if spans output</td>
+</tr>
+<tr class="even">
+<td><strong>2D → 3D</strong></td>
+<td>Plane floating in 3D</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr class="odd">
+<td><strong>3D → 2D</strong></td>
+<td>Flatten cube to plane</td>
+<td>❌</td>
+<td>✅ if plane is filled</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<table>
+<thead>
+<tr class="header">
+<th>Matrix Shape</th>
+<th>Injective?</th>
+<th>Surjective?</th>
+<th>Bijective?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Square (n = m)</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Tall (m &gt; n)</strong></td>
+<td>✅ Possible</td>
+<td>❌ No</td>
+<td>❌ No</td>
+</tr>
+<tr class="odd">
+<td><strong>Wide (m &lt; n)</strong></td>
+<td>❌ No</td>
+<td>✅ Possible</td>
+<td>❌ No</td>
+</tr>
+</tbody>
+</table>
+<h3 id="invertible-matrix">Invertible Matrix</h3>
+<ul>
+<li><p>For a matrix to be invertible, there must be a mapping from each
+of vectors in the domain to the image of its inverse, i.e. it is <a
+href="#bijective">Bijective</a>. This means no non-zero vectors will be
+mapped to zero, only zero will map to zero.<span
+class="sidenote-wrapper"><label for="sn-11" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-11" class="margin-toggle"/><span
+class="sidenote">Conversely, if the matrix is non-invertible, then it
+will collapse some part of its space to a lower dimension by mapping a
+non-zero vector to zero.<br />
+<br />
+</span></span> Invertible matrices allow stretching, rotating, etc. but
+preserves the dimensionality. The inverse is defined by: <span
+class="math inline">\(AA^{-1} = I\)</span></p></li>
+<li><p>Matrix is only invertible if <span class="math inline">\(det A
+\neq 0\)</span></p></li>
+<li><p>Indicates a solution to the matrix can be found</p></li>
+</ul>
+<h3 id="characteristic-polynomial">Characteristic Polynomial</h3>
+<p>For a square matrix: <span class="math display">\[P_a(\lambda) =
+det(A - \lambda I)\]</span> Used in calculating <a
+href="#eigenvector">Eigenvector</a> by solving for <span
+class="math inline">\(P_a(\lambda) = 0\)</span>.</p>
+<p>The fundamental theorem of algebra guarantees it will have n roots
+for an n-dimensional complex vector space, it does not hold for a real
+vector space since the eigenvalues may not exist.</p>
+<p>To then solve for eigenvector <span class="math display">\[det(A -
+\lambda I)x = 0\]</span> or <span class="math display">\[ker(A-\lambda
+I)\]</span></p>
+<h3 id="eigenvectors-and-eigenvalues">Eigenvectors and Eigenvalues</h3>
+<p>Eigenvectors and values characterize the <a
+href="#linear-transformation">Linear Transformation</a> of a square
+matrix. The mathematical relationship is: <span
+class="math display">\[Av = \lambda v\]</span> where v is the
+eigenvector and <span class="math inline">\(\lambda\)</span> is the
+eigenvalue.</p>
+<p><a
+href="https://claude.ai/public/artifacts/bc712e4f-70d5-4dba-8ff0-5d79695343f4">Visualization
+of Eigenvector and value</a> One of the motivations for finding the
+eigenvalues and eigenvectors is it can simplify the linear
+transformation such as finding a diagonal matrix equivalent (<span
+class="math inline">\(A=PDP^{-1}\)</span>)of the matrix for more
+efficient calculations. When matrix is broken down into eigenvalues and
+eigenvectors, the basis becomes just scaling, no shear, rotation, or
+stretch.</p>
+<h4 id="eigenvector">Eigenvector</h4>
+<p>Eigenvectors point in the directions that are preserved (or exactly
+reversed) by a linear transformation. While most vectors change both
+magnitude and direction when transformed, eigenvectors only change in
+magnitude by a factor equal to their corresponding eigenvalue.</p>
+<h4 id="eigenvalue">Eigenvalue</h4>
+<p>Eigenvalues indicate how much the eigenvectors are stretched as a
+result of the linear transformation. If the eigenvalue is 1 then there
+is no change, 0 means the eigenvector becomes the zero vector and
+reduces the dimensionality of the vector space. The number of zero
+eigenvalues indicates how much the dimensionality of the vector space is
+reduced.</p>
+<h4 id="calculation">Calculation</h4>
+<p>For a matrix A, eigenvector x, and eigenvalue <span
+class="math inline">\(\lambda\)</span> : <span class="math inline">\(Ax
+= \lambda x\)</span></p>
+<ul>
+<li><span class="math inline">\(det(A - \lambda I_n = 0)\)</span></li>
+<li>If <span class="math inline">\(A \in R^{nxn}\)</span> is symmetric,
+there is an [ONB] of the vector space with the eigenvector of A and a
+real eigenvalue</li>
+<li>The <a href="#determinant">Determinant</a> of a matrix is equal to
+the product of its eigenvalues: <span class="math inline">\(det(A) = \Pi
+i=1\)</span> to <span class="math inline">\(n \lambda_i\)</span>
+<ul>
+<li>Ties in the fact that the determinant calculates the area of the
+transformation with the eigenvalues.</li>
+</ul></li>
+<li>Solving for the <a href="#eigenvalue">Eigenvalue</a> and <a
+href="#eigenvector">Eigenvector</a>
+<ol type="1">
+<li>Set [Charateristic Polynomial] = 0: <span
+class="math display">\[P_A(\lambda) = 0\]</span> solving for the
+Eigenvalues</li>
+<li>Use Eignevalues to then find Eigenvectors by solving: <span
+class="math display">\[(A-\lambda_i I)v_i = 0\]</span></li>
+</ol></li>
+</ul>
+<h3 id="pagerank">PageRank</h3>
+<p>Uses the <a href="#eigenvector">Eigenvector</a> of the maximal <a
+href="#eigenvalue">Eigenvalue</a>s to rank a page based on the incoming
+links and how important they are.</p>
+</section>
+<section>
+<h2 id="null-space">Null space</h2>
+<p>Has dimension equal to the number of zero <a
+href="#eigenvalue">Eigenvalue</a>s.</p>
+</section>
+<section>
+<h2 id="matrix-decomposition">Matrix Decomposition</h2>
+<p>Matrix decomposition breaks a matrix down into multiple factors, much
+like factoring an equation. The resulting components can describe
+characteristics of the matrix, as well as make some calculations more
+efficient.</p>
+<h3 id="cholesky-decomposition">Cholesky Decomposition</h3>
+<p>Decomposes into a lower triangular matrix and its transpose: <span
+class="math inline">\(A = LL^T\)</span></p>
+<p><span class="math inline">\(\begin{bmatrix} A_{00} A_{01} A_{02} \\
+A_{10} A_{11} A_{12} \\ A_{20} A_{21} A_{22} \end{bmatrix}=\)</span>
+<span class="math inline">\(\begin{bmatrix} L_{00} L_{01} L_{02} \\
+L_{10} L_{11} L_{12} \\ 0 0 0 \end{bmatrix} \begin{bmatrix} L_{00}
+L_{01} L_{02} \\ L_{10} L_{11} L_{12} \\ L_{20} L_{21} L_{22}
+\end{bmatrix}\)</span></p>
+<ul>
+<li>Can be more efficient than LU decomposition</li>
+<li>Calculate by building the matrix of <span
+class="math inline">\(LL^T\)</span> then iterating through the columns
+when set equal to A to produce L.</li>
+</ul>
+<h3 id="lu-decomposition">LU Decomposition</h3>
+<ul>
+<li><p><span class="math inline">\(A = LU\)</span> where <span
+class="math inline">\(U=A^{n-1}\)</span> Upper triangular matrix and
+<span class="math inline">\(L=G_1^{-1}G_2^{-1}..G_{n-1}^{-1}\)</span>
+Lower triangular matrix <span class="math inline">\(L\)</span>: unit
+lower triangular (1s on the diagonal, multipliers below). <span
+class="math inline">\(U\)</span>: upper triangular.</p></li>
+<li><p>Matrix form of Gaussian Elimination</p></li>
+<li><p>Gaussian elimination transforms <span
+class="math inline">\(A\)</span> into an upper triangular matrix <span
+class="math inline">\(U\)</span>.</p></li>
+<li><p>The multipliers used in the elimination steps form the entries of
+<span class="math inline">\(L\)</span>.</p></li>
+<li><p>Equivalently, elimination can be described with elementary
+elimination matrices <span class="math inline">\(G_i\)</span>: <span
+class="math inline">\(U = G_{n-1} G_{n-2} \cdots G_1 A\)</span> Taking
+inverses gives</p>
+<p><span class="math inline">\(A = (G_1^{-1} G_2^{-1} \cdots
+G_{n-1}^{-1}) U\)</span>, where <span class="math inline">\(L = G_1^{-1}
+G_2^{-1} \cdots G_{n-1}^{-1}\)</span>.</p></li>
+</ul>
+<h3 id="eigendecomposition">Eigendecomposition</h3>
+<ul>
+<li>Breaks a matrix down into <span
+class="math inline">\(PDP^{-1}\)</span> but only works on square
+matrices with linearly independent [[eigenvectors]].</li>
+<li><span class="math inline">\(P\)</span>: columns are eigenvectors of
+<span class="math inline">\(A\)</span></li>
+<li><span class="math inline">\(D\)</span>: diagonal entries are the
+corresponding [[eigenvalues]]</li>
+</ul>
+<h3 id="singular-value-decomposition">Singular Value Decomposition</h3>
+<p>Any (including non-square) real matrix <span class="math inline">\(A
+\in \mathbb{R}^{m \times n}\)</span> can be decomposed as <span
+class="math inline">\(A = U \Sigma V^T\)</span>, where <span
+class="math inline">\(U\)</span> and <span
+class="math inline">\(V\)</span> are orthogonal matrices containing left
+and right singular vectors, and <span
+class="math inline">\(\Sigma\)</span> is a diagonal matrix of singular
+values. This decomposition enables least-squares solutions,
+dimensionality reduction, and PCA (when applied to centered data).
+Truncating at rank <span class="math inline">\(r\)</span> gives the best
+rank-<span class="math inline">\(r\)</span> approximation (Eckart–Young
+theorem).</p>
+<ul>
+<li>U and V are square, orthogonal, unitary matrices of singular vectors
+that rotate the input</li>
+<li><span class="math inline">\(\Sigma\)</span> is a diagonal matrix of
+singular values that stretches the input.</li>
+<li>The singular values are the square roots of the eigenvalues of <span
+class="math inline">\(A^T A\)</span>.</li>
+<li>Columns of <span class="math inline">\(V\)</span> are eigenvectors
+of <span class="math inline">\(A^T A\)</span>, columns of <span
+class="math inline">\(U\)</span> are eigenvectors of <span
+class="math inline">\(A A^T\)</span>.</li>
+<li>Taking <span class="math inline">\(u_1, \sigma_1\)</span>, and <span
+class="math inline">\(v_1\)</span> gives the highest variance / most
+information</li>
+<li><span class="math inline">\(\Sigma\)</span> weighs the importance of
+the columns of <span class="math inline">\(U\)</span> and <span
+class="math inline">\(V^T\)</span>. Only <span
+class="math inline">\(\min(m,n)\)</span> singular values are nonzero;
+the rest of the diagonal entries are zeros. The “economy SVD” truncates
+<span class="math inline">\(U\)</span> and <span
+class="math inline">\(V\)</span> keeping only the columns that
+correspond to non-zero singular values.</li>
+<li>Given the values of <span class="math inline">\(\Sigma\)</span>,
+keeping the first <span class="math inline">\(r\)</span> singular
+values/vectors yields the best rank-<span
+class="math inline">\(r\)</span> approximation of <span
+class="math inline">\(A\)</span>.<span
+class="sidenote-wrapper"><label for="sn-12" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-12" class="margin-toggle"/><span
+class="sidenote">Great explanation here: <a
+href="https://youtu.be/xy3QyyhiuY4?si=4isr2XlyvT8hLyKG"
+class="uri">https://youtu.be/xy3QyyhiuY4?si=4isr2XlyvT8hLyKG</a><br />
+<br />
+</span></span> <span
+class="sidenote-wrapper"><label for="sn-13" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-13" class="margin-toggle"/><span
+class="sidenote">Eckard-Young Theorem<br />
+<br />
+</span></span> broken down as: <span class="math inline">\(\tilde{U}
+\tilde{\Sigma} \tilde{V^T}\)</span></li>
+</ul>
+</section>
+<section>
+<h2 id="references">References</h2>
+<ul>
+<li>Math for Machine Learning (MML)</li>
+<li>Math of Machine Learning (MoML)</li>
+<li>3b1b</li>
+<li>MIT 18.06 :
+<ul>
+<li><a href="https://youtu.be/mBcLRGuAFUk?si=TVOvcCsQmKQedM3W"
+class="uri">https://youtu.be/mBcLRGuAFUk?si=TVOvcCsQmKQedM3W</a></li>
+</ul></li>
+<li>Steve Brunton YouTube for SVD: <a
+href="https://youtube.com/playlist?list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv&amp;si=DhYo5BRqiG0t2LHO"
+class="uri">https://youtube.com/playlist?list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv&amp;si=DhYo5BRqiG0t2LHO</a></li>
+</ul>
+</section>
+</article>
+</body>
+</html>

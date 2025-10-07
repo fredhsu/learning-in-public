@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>calculus</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="tufte.css" />
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<article>
+<h1 id="calculus">Calculus</h1>
+<section>
+<h2 id="taylor-polynomial">Taylor Polynomial</h2>
+<p>Provides an approximation of a function that gets more accurate as
+<span class="math inline">\(n\)</span> increases.</p>
+<p><span class="math display">\[T_n(x) := \sum_{k=0}{n}
+\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k\]</span> where <span
+class="math inline">\(f^{(k)}(x_0)\)</span> is the kth derivative of f
+at <span class="math inline">\(x_0\)</span></p>
+<p>Taylor series is the Taylor polynomial with <span
+class="math inline">\(n=\infty\)</span></p>
+</section>
+<section>
+<h2 id="gradient">Gradient</h2>
+<p>A row vector with partial derivatives with regard to the elements of
+the original vector.</p>
+<p><span class="math display">\[\nabla_x f = \left[\frac{\partial
+f(x)}{x_1},...,\frac{\partial f(x)}{x_n}\right] \in
+\mathbb{R}^{x_n}\]</span></p>
+</section>
+<section>
+<h2 id="chain-rule-for-partial-derivatives">Chain rule for partial
+derivatives</h2>
+<p><span class="math display">\[\frac{\partial}{\partial x}(g \circ
+f)(x) = \frac{\partial}{\partial x}(g(f(x))) = \frac{\partial
+g}{\partial f} \frac{\partial f}{\partial x}\]</span></p>
+<p>This can be applied to parameterized functions to get the [<a
+href="#gradient">gradient</a>], for instance <span
+class="math inline">\(f(x_1,x_2)\)</span> where <span
+class="math inline">\(x_1\)</span> &amp; <span
+class="math inline">\(x_2\)</span> are functions of <span
+class="math inline">\(t\)</span>, we can apply the chain rule to get the
+gradient.</p>
+<p><span class="math display">\[
+\frac{d}{dt} f(x_1(t), x_2(t))
+= \frac{\partial f}{\partial x_1}\frac{dx_1}{dt}
++ \frac{\partial f}{\partial x_2}\frac{dx_2}{dt}.
+\]</span></p>
+<p>For multivariable functions use [[Jacobian Matrix]] Let <span
+class="math inline">\(f:\mathbb{R}^n \to \mathbb{R}^m\)</span> and <span
+class="math inline">\(g:\mathbb{R}^m \to \mathbb{R}^p\)</span>.<br />
+Then:</p>
+<p><span class="math display">\[
+D(g \circ f)(x) = Dg(f(x)) \cdot Df(x),
+\]</span></p>
+<p>where:</p>
+<p><span class="math inline">\(Df(x)\)</span> is the <span
+class="math inline">\(m \times n\)</span> Jacobian of <span
+class="math inline">\(f\)</span>, <span
+class="math inline">\(Dg(f(x))\)</span> is the <span
+class="math inline">\(p \times m\)</span> Jacobian of <span
+class="math inline">\(g\)</span>,</p>
+<p>The result is a <span class="math inline">\(p \times n\)</span>
+Jacobian.</p>
+</section>
+</article>
+</body>
+</html>
