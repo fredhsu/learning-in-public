@@ -22,7 +22,6 @@
     }
   </style>
   <link rel="stylesheet" href="tufte.css" />
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
   type="text/javascript"></script>
@@ -102,33 +101,33 @@ described.</p>
 <col style="width: 55%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Goal</th>
 <th>What You Gain</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>Simplify matrix computations</td>
 <td>Diagonal or block-diagonal matrices</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Align with symmetry</td>
 <td>Cleaner equations, better insight</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Reduce dimensions (PCA)</td>
 <td>Compress data, denoise</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Improve numerical stability</td>
 <td>Fewer round-off errors</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Easier geometric understanding</td>
 <td>Vectors align with physical intuition</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Animate or transform objects</td>
 <td>Efficient manipulation of scenes</td>
 </tr>
@@ -530,7 +529,7 @@ Injective/Surjective/Bijective</h3>
 <col style="width: 30%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Shape</th>
 <th>Transformation</th>
 <th>Injective?</th>
@@ -538,19 +537,19 @@ Injective/Surjective/Bijective</h3>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><strong>2D → 2D</strong></td>
 <td>Shear/rotate</td>
 <td>✅ if no collapse</td>
 <td>✅ if spans output</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>2D → 3D</strong></td>
 <td>Plane floating in 3D</td>
 <td>✅</td>
 <td>❌</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>3D → 2D</strong></td>
 <td>Flatten cube to plane</td>
 <td>❌</td>
@@ -561,7 +560,7 @@ Injective/Surjective/Bijective</h3>
 <hr />
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>Matrix Shape</th>
 <th>Injective?</th>
 <th>Surjective?</th>
@@ -569,19 +568,19 @@ Injective/Surjective/Bijective</h3>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><strong>Square (n = m)</strong></td>
 <td>✅ Yes</td>
 <td>✅ Yes</td>
 <td>✅ Yes</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>Tall (m &gt; n)</strong></td>
 <td>✅ Possible</td>
 <td>❌ No</td>
 <td>❌ No</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Wide (m &lt; n)</strong></td>
 <td>❌ No</td>
 <td>✅ Possible</td>
@@ -787,6 +786,23 @@ class="sidenote">Eckard-Young Theorem<br />
 </span></span> broken down as: <span class="math inline">\(\tilde{U}
 \tilde{\Sigma} \tilde{V^T}\)</span></li>
 </ul>
+<h3 id="adjoint">Adjoint</h3>
+<p>Adjoint transformation <span class="math inline">\(f*\)</span>: <span
+class="math display">\[\langle f(x), y \rangle = \langle x, f*(y)
+\rangle\]</span> if A is in standard ONB then <span
+class="math inline">\(f*=A^T\)</span>: <span
+class="math display">\[\langle Ax, y \rangle = \langle x, A^T y
+\rangle\]</span></p>
+<p>Adjoints let you swap the order of applying a linear transformation
+and applying a functional/inner product — while keeping the scalar
+result unchanged.</p>
+<p>So you can think of adjoints as a bookkeeping device that lets you
+rearrange the order:</p>
+<p>Either apply A to the vector and then pair with w or apply A∗ to the
+functional/test vector w and then pair with v. Both paths give the same
+result.</p>
+<p>Optimization/Backprop: lets you “move” derivatives around (gradients
+transform with A* instead of A).</p>
 </section>
 <section>
 <h2 id="references">References</h2>

@@ -1,7 +1,7 @@
 .PHONY: default clean
 
 # Source files
-SOURCES := calculus/calculus.md linear-algebra/linear-algebra.md
+SOURCES := calculus/calculus.md linear-algebra/linear-algebra.md probability/probability.md
 
 # Outputs go in top level: strip directories
 OUTPUTS := $(notdir $(SOURCES:.md=.html))

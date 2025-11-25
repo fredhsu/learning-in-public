@@ -22,7 +22,6 @@
     }
   </style>
   <link rel="stylesheet" href="tufte.css" />
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
   type="text/javascript"></script>
@@ -30,6 +29,55 @@
 <body>
 <article>
 <h1 id="calculus">Calculus</h1>
+<section>
+<h2 id="hessian-matrix">Hessian Matrix</h2>
+<p>A square matrix similar to the Jacobian, but with second order
+partial derivatives. It measures the curvature of the function
+locally.</p>
+<p><span class="math display">\[
+(\bold{H}_f)_{i,j}  = \frac{\partial^2 f}{\partial x_i \partial x_j}
+\]</span></p>
+</section>
+<section>
+<h2 id="autodiff">Autodiff</h2>
+<p>Automatic differentiation (autodiff) is a method for efficiently
+computing derivatives of functions expressed as computer programs. Every
+program can be broken down into elementary arithmetic operations (add,
+multiply, divide, etc.) and common functions (exp, log, sin, cos, …). By
+representing these operations in a computational graph and applying the
+chain rule, autodiff systematically propagates derivatives through the
+graph. Unlike symbolic differentiation (which can produce unwieldy
+expressions) or numerical differentiation (which suffers from
+approximation error), autodiff provides exact derivatives up to machine
+precision. There are two main modes:</p>
+<ul>
+<li><p>Forward mode: propagates derivatives from inputs to
+outputs.</p></li>
+<li><p>Reverse mode (<a href="#backpropagation">backpropagation</a>):
+propagates derivatives from outputs to inputs, and is particularly
+efficient when computing gradients of scalar outputs with respect to
+many inputs (as in machine learning).</p></li>
+</ul>
+</section>
+<section>
+<h2 id="backpropagation">Backpropagation</h2>
+<p>An efficient way to calculate the gradients of the nodes in the
+computational graph. It works by calculating the partial derivatives of
+each node using the chain rule, starting from the loss node and working
+backward from the output to the parameters.</p>
+<p>Example:</p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial \theta_i} =
+\frac{\partial L}{\partial f_k} \cdot
+\frac{\partial f_k}{\partial f_{k-1}} \cdot
+\dots
+\frac{\partial f_{i+1}}{\partial f_i} \cdot
+\frac{\partial f_{i}}{\partial \theta_i}
+\]</span></p>
+<p>Backpropagation is a special case of reverse-mode [<a
+href="#autodiff">autodiff</a>], using algorithmic as opposed to symbol
+methods to calculate the gradients.</p>
+</section>
 <section>
 <h2 id="jacobian-matrix">Jacobian Matrix</h2>
 <p>A Jacobian matrix is a collection of all the first-order partial
